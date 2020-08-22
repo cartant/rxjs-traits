@@ -1,1 +1,1 @@
-# rxjs-arity
+# rxjs-traits
