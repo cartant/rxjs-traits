@@ -3,7 +3,14 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-import { Add, Length, Max, Min, Subtract } from "../source/cardinality";
+import {
+  Add,
+  Element,
+  Length,
+  Max,
+  Min,
+  Subtract,
+} from "../source/cardinality";
 
 declare function describe(...args: unknown[]): void;
 declare function it(...args: unknown[]): void;
@@ -20,6 +27,21 @@ describe("Add", () => {
   it("should resolve as undefined for out-of-range cardinalities", () => {
     const a = as<Add<1, -1>>(); // $ExpectType undefined
     const b = as<Add<1, 9>>(); // $ExpectType undefined
+  });
+});
+
+describe("Element", () => {
+  it("should infer elements of a single type", () => {
+    const a = as<Element<1[]>>(); // $ExpectType 1
+    const b = as<Element<[1, 1]>>(); // $ExpectType 1
+  });
+
+  it("should infer elements of many types", () => {
+    const a = as<Element<[1, 2]>>(); // $ExpectType 1 | 2
+  });
+
+  it("should resolve as never for non-array like types", () => {
+    const a = as<Element<1>>(); // $ExpectType never
   });
 });
 

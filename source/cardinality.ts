@@ -70,6 +70,10 @@ export type Min<
     : N
   : N;
 
+export type Element<TArrayLike> = TArrayLike extends readonly (infer TElement)[]
+  ? TElement
+  : never;
+
 export type Length<TArrayLike> = TArrayLike extends readonly unknown[]
   ? number extends TArrayLike["length"]
     ? N

@@ -5,6 +5,7 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
+import { Element, Length } from "./cardinality";
 import { Traits } from "./traits";
 
 type ObservableWithTraits<T, TTraits extends Traits> = root.Observable<T> &
@@ -32,6 +33,34 @@ export const NEVER = root.NEVER as ObservableWithTraits<
   }
 >;
 
+export function from<O extends readonly unknown[]>(
+  input: O
+): ObservableWithTraits<
+  Element<O>,
+  {
+    async: false;
+    complete: true;
+    error: undefined;
+    max: Length<O>;
+    min: Length<O>;
+  }
+>;
+export function from<O extends root.ObservableInput<unknown>>(
+  input: O
+): ObservableWithTraits<
+  root.ObservedValueOf<O>,
+  {
+    async: false;
+    complete: true;
+    error: undefined;
+    max: undefined;
+    min: 0;
+  }
+>;
+export function from<O extends root.ObservableInput<unknown>>(input: O) {
+  return root.from(input);
+}
+
 export function interval(
   period = 0,
   scheduler: root.SchedulerLike = root.asyncScheduler
@@ -53,6 +82,19 @@ export function map<T, R>(
   thisArg?: any
 ) {
   return operators.map(project, thisArg);
+}
+
+export function of<A extends unknown[]>(...args: A) {
+  return root.of(...args) as ObservableWithTraits<
+    Element<A>,
+    {
+      async: false;
+      complete: true;
+      error: undefined;
+      max: Length<A>;
+      min: Length<A>;
+    }
+  >;
 }
 
 export function skip<T>(count: number) {
