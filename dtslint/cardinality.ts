@@ -4,7 +4,7 @@
  */
 /* eslint etc/no-unused-declaration: 0 */
 
-import { Add, Length, Max, Min, Subtract } from "../source/math";
+import { Add, Length, Max, Min, Subtract } from "../source/cardinality";
 
 declare function describe(...args: unknown[]): void;
 declare function it(...args: unknown[]): void;

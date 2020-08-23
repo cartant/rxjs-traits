@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-type Cardinality = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+export type Cardinality = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 type N = undefined;
 
 type Additions = [
