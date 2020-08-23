@@ -5,7 +5,7 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
-import { Element, Length, Min, Subtract } from "./cardinality";
+import { Add, Element, Length, Min, Subtract } from "./cardinality";
 import { Traits, WithMax, WithMin } from "./traits";
 
 export interface ObservableWithTraits<TElement, TTraits extends Traits>
@@ -247,6 +247,19 @@ export function skip<TSourceElement, TSourceTraits extends Traits>(
   count: number
 ) {
   return operators.skip<TSourceElement>(count);
+}
+
+export function startWith<
+  TSourceElement,
+  TSourceTraits extends Traits,
+  TValueElement
+>(value: TValueElement) {
+  return operators.startWith(value) as OperatorFunctionWithTraits<
+    TSourceElement,
+    TSourceTraits,
+    TSourceElement | TValueElement,
+    WithMax<TSourceTraits, Add<TSourceTraits["max"], 1>>
+  >;
 }
 
 export function take<TSourceElement, TSourceTraits extends Traits>(

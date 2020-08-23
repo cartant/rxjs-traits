@@ -12,6 +12,7 @@ import {
   map,
   of,
   skip,
+  startWith,
   take,
   throwError,
   timer,
@@ -117,6 +118,16 @@ describe("skip", () => {
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
     const max = as(result, "max"); // $ExpectType undefined
+  });
+});
+
+describe("startWith", () => {
+  it("should support startWith", () => {
+    const source = of(1, 2, 3);
+    const result = source.pipe(startWith(-1));
+    const async = as(result, "async"); // $ExpectType false
+    const complete = as(result, "complete"); // $ExpectType true
+    const max = as(result, "max"); // $ExpectType 4
   });
 });
 
