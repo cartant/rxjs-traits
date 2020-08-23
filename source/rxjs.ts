@@ -8,8 +8,27 @@ import * as operators from "rxjs/operators";
 import { Element, Length } from "./cardinality";
 import { Traits } from "./traits";
 
-type ObservableWithTraits<T, TTraits extends Traits> = root.Observable<T> &
-  TTraits;
+type ObservableWithTraits<TElement, TTraits extends Traits> = root.Observable<
+  TElement
+> &
+  TTraits & {
+    pipe<TResultElement, TResultTraits extends Traits>(
+      operator: OperatorFunctionWithTraits<
+        TElement,
+        TTraits,
+        TResultElement,
+        TResultTraits
+      >
+    ): ObservableWithTraits<TResultElement, TResultTraits>;
+  };
+type OperatorFunctionWithTraits<
+  TSourceElement,
+  TSourceTraits extends Traits,
+  TResultElement,
+  TResultTraits extends Traits
+> = (
+  source: ObservableWithTraits<TSourceElement, TSourceTraits>
+) => ObservableWithTraits<TResultElement, TResultTraits>;
 
 export const EMPTY = root.EMPTY as ObservableWithTraits<
   never,
@@ -77,11 +96,20 @@ export function interval(
   >;
 }
 
-export function map<T, R>(
-  project: (value: T, index: number) => R,
+export function map<
+  TSourceElement,
+  TResultElement,
+  TSourceTraits extends Traits
+>(
+  project: (value: TSourceElement, index: number) => TResultElement,
   thisArg?: any
-) {
-  return operators.map(project, thisArg);
+): OperatorFunctionWithTraits<
+  TSourceElement,
+  TSourceTraits,
+  TResultElement,
+  TSourceTraits
+> {
+  return operators.map(project, thisArg) as any;
 }
 
 export function of<A extends unknown[]>(...args: A) {
