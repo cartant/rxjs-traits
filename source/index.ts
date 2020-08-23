@@ -4,4 +4,5 @@
  */
 
 export { Cardinality } from "./cardinality";
+export * from "./rxjs";
 export * from "./traits";
