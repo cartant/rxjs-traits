@@ -24,6 +24,8 @@ describe("map", () => {
   it("should support map()", () => {
     const source = of(1, 2, 3);
     const result = source.pipe(map((value) => JSON.stringify(value)));
+    const async = as(result, "async"); // $ExpectType false
+    const complete = as(result, "complete"); // $ExpectType true
     const max = as(result, "max"); // $ExpectType 3
     const min = as(result, "min"); // $ExpectType 3
   });
@@ -31,6 +33,8 @@ describe("map", () => {
   it("should support map() from EMPTY", () => {
     const source = EMPTY;
     const result = source.pipe(map((value) => JSON.stringify(value)));
+    const async = as(result, "async"); // $ExpectType false
+    const complete = as(result, "complete"); // $ExpectType true
     const max = as(result, "max"); // $ExpectType 0
     const min = as(result, "min"); // $ExpectType 0
   });
@@ -40,12 +44,16 @@ describe("skip", () => {
   it("should support skip(1)", () => {
     const source = of(1, 2, 3);
     const result = source.pipe(skip(1));
+    const async = as(result, "async"); // $ExpectType false
+    const complete = as(result, "complete"); // $ExpectType true
     const max = as(result, "max"); // $ExpectType 2
   });
 
   it("should support skip(1) from EMPTY", () => {
     const source = EMPTY;
     const result = source.pipe(skip(1));
+    const async = as(result, "async"); // $ExpectType false
+    const complete = as(result, "complete"); // $ExpectType true
     const max = as(result, "max"); // $ExpectType undefined
   });
 });
@@ -54,12 +62,16 @@ describe("take", () => {
   it("should support take(1)", () => {
     const source = of(1, 2, 3);
     const result = source.pipe(take(1));
+    const async = as(result, "async"); // $ExpectType false
+    const complete = as(result, "complete"); // $ExpectType true
     const max = as(result, "max"); // $ExpectType 1
   });
 
   it("should support take(1) from EMPTY", () => {
     const source = EMPTY;
     const result = source.pipe(take(1));
+    const async = as(result, "async"); // $ExpectType false
+    const complete = as(result, "complete"); // $ExpectType true
     const max = as(result, "max"); // $ExpectType 0
   });
 });
