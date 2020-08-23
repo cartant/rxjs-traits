@@ -880,9 +880,9 @@ eslint-module-utils@^2.6.0:
     pkg-dir "^2.0.0"
 
 eslint-plugin-dtslint@^1.0.1:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-dtslint/-/eslint-plugin-dtslint-1.1.0.tgz#925e9f3b264a9cb41506b8ec6d527b61fdfc5e17"
-  integrity sha512-0oaWDkL2oS3EBVjlgmJqmOtXePAjOoBnRnVAsD2KO7FjbDNDyBweoCnJMga3l71XACaZrFNID22wRZFcClsJmw==
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-dtslint/-/eslint-plugin-dtslint-1.1.1.tgz#6d88ab4fddee2f9579ba0c4ab8923d4a6725b76b"
+  integrity sha512-DVN28ia5wlEIzZ5SOCeb+CiTPGavmsgE8urMPcf+DKYaLESDM/fzxEkKRCqgKfh/JChPMsuKOmr/RukAfIk1hw==
   dependencies:
     "@phenomnomnominal/tsquery" "^4.1.0"
     "@typescript-eslint/experimental-utils" "^3.2.0"
