@@ -5,6 +5,7 @@
   "rules": {
     "dtslint/expect-deprecation": ["error"],
     "dtslint/expect-type": ["error"],
-    "dtslint/no-typo": ["error"]
+    "dtslint/no-typo": ["error"],
+    "etc/no-unused-declaration": ["off"]
   }
 }

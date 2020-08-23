@@ -3,4 +3,5 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-export const unused = true;
+export { Cardinality } from "./cardinality";
+export * from "./traits";

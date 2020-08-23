@@ -2,7 +2,6 @@
  * @license Use of this source code is governed by an MIT-style license that
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
-/* eslint etc/no-unused-declaration: 0 */
 
 import { Add, Length, Max, Min, Subtract } from "../source/cardinality";
 
