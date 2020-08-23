@@ -145,13 +145,25 @@ export function from<O extends readonly unknown[]>(
     min: Length<O>;
   }
 >;
+export function from<T>(
+  input: Promise<T>
+): ObservableWithTraits<
+  T,
+  {
+    async: true;
+    complete: undefined;
+    error: undefined;
+    max: 1;
+    min: 0;
+  }
+>;
 export function from<O extends root.ObservableInput<unknown>>(
   input: O
 ): ObservableWithTraits<
   root.ObservedValueOf<O>,
   {
-    async: false;
-    complete: true;
+    async: undefined;
+    complete: undefined;
     error: undefined;
     max: undefined;
     min: 0;
