@@ -281,7 +281,7 @@ export function take<TSourceElement, TSourceTraits extends Traits>(
 export function take<TSourceElement, TSourceTraits extends Traits>(
   count: number
 ) {
-  return operators.take<TSourceElement>(count) as unknown;
+  return operators.take<TSourceElement>(count);
 }
 
 export function throwError(error: any, scheduler?: root.SchedulerLike) {
