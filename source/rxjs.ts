@@ -170,7 +170,7 @@ export function from<O extends root.ObservableInput<unknown>>(
   }
 >;
 export function from<O extends root.ObservableInput<unknown>>(input: O) {
-  return root.from(input) as unknown;
+  return root.from(input);
 }
 
 export function ignoreElements<TSourceElement, TSourceTraits extends Traits>() {
@@ -246,7 +246,7 @@ export function skip<TSourceElement, TSourceTraits extends Traits>(
 export function skip<TSourceElement, TSourceTraits extends Traits>(
   count: number
 ) {
-  return operators.skip<TSourceElement>(count) as unknown;
+  return operators.skip<TSourceElement>(count);
 }
 
 export function take<TSourceElement, TSourceTraits extends Traits>(
@@ -316,5 +316,5 @@ export function timer(
   periodOrScheduler?: number | root.SchedulerLike,
   scheduler?: root.SchedulerLike
 ) {
-  return root.timer(dueTime, periodOrScheduler, scheduler) as unknown;
+  return root.timer(dueTime, periodOrScheduler, scheduler);
 }
