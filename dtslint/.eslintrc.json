@@ -1,0 +1,10 @@
+{
+  "extends": [],
+  "plugins": ["dtslint"],
+  "root": false,
+  "rules": {
+    "dtslint/expect-deprecation": ["error"],
+    "dtslint/expect-type": ["error"],
+    "dtslint/no-typo": ["error"]
+  }
+}

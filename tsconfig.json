@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "esnext",
+    "strict": true,
+    "target": "esnext"
+  },
+  "include": ["dtslint/**/*.ts", "source/**/*.ts"],
+  "files": ["source/index.ts"]
+}
