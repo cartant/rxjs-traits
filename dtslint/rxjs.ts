@@ -6,6 +6,7 @@
 import {
   EMPTY,
   from,
+  ignoreElements,
   interval,
   ObservableWithTraits,
   map,
@@ -47,6 +48,17 @@ describe("from", () => {
     const complete = as(source, "complete"); // $ExpectType undefined
     const max = as(source, "max"); // $ExpectType 1
     const min = as(source, "min"); // $ExpectType 0
+  });
+});
+
+describe("ignoreElements", () => {
+  it("should support ignoreElements", () => {
+    const source = of(1, 2, 3);
+    const result = source.pipe(ignoreElements());
+    const async = as(result, "async"); // $ExpectType false
+    const complete = as(result, "complete"); // $ExpectType true
+    const max = as(result, "max"); // $ExpectType 0
+    const min = as(result, "min"); // $ExpectType 0
   });
 });
 

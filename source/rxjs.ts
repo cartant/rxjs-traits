@@ -6,7 +6,7 @@
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
 import { Element, Length, Min, Subtract } from "./cardinality";
-import { Traits, WithMax } from "./traits";
+import { Traits, WithMax, WithMin } from "./traits";
 
 export interface ObservableWithTraits<TElement, TTraits extends Traits>
   extends root.Observable<TElement> {
@@ -111,7 +111,7 @@ export type OperatorFunctionWithTraits<
   source: ObservableWithTraits<TSourceElement, TSourceTraits>
 ) => ObservableWithTraits<TResultElement, TResultTraits>;
 
-export const EMPTY = (root.EMPTY as unknown) as ObservableWithTraits<
+export const EMPTY = root.EMPTY as ObservableWithTraits<
   never,
   {
     async: false;
@@ -122,7 +122,7 @@ export const EMPTY = (root.EMPTY as unknown) as ObservableWithTraits<
   }
 >;
 
-export const NEVER = (root.NEVER as unknown) as ObservableWithTraits<
+export const NEVER = root.NEVER as ObservableWithTraits<
   never,
   {
     async: false;
@@ -173,11 +173,20 @@ export function from<O extends root.ObservableInput<unknown>>(input: O) {
   return root.from(input) as unknown;
 }
 
+export function ignoreElements<TSourceElement, TSourceTraits extends Traits>() {
+  return operators.ignoreElements() as OperatorFunctionWithTraits<
+    TSourceElement,
+    TSourceTraits,
+    TSourceElement,
+    WithMax<WithMin<TSourceTraits, 0>, 0>
+  >;
+}
+
 export function interval(
   period = 0,
   scheduler: root.SchedulerLike = root.asyncScheduler
 ) {
-  return (root.interval(period, scheduler) as unknown) as ObservableWithTraits<
+  return root.interval(period, scheduler) as ObservableWithTraits<
     number,
     {
       async: true;
@@ -191,16 +200,13 @@ export function interval(
 
 export function map<
   TSourceElement,
-  TResultElement,
-  TSourceTraits extends Traits
+  TSourceTraits extends Traits,
+  TResultElement
 >(
   project: (value: TSourceElement, index: number) => TResultElement,
   thisArg?: any
 ) {
-  return (operators.map(
-    project,
-    thisArg
-  ) as unknown) as OperatorFunctionWithTraits<
+  return operators.map(project, thisArg) as OperatorFunctionWithTraits<
     TSourceElement,
     TSourceTraits,
     TResultElement,
@@ -209,7 +215,7 @@ export function map<
 }
 
 export function of<A extends unknown[]>(...args: A) {
-  return (root.of(...args) as unknown) as ObservableWithTraits<
+  return root.of(...args) as ObservableWithTraits<
     Element<A>,
     {
       async: false;
@@ -266,7 +272,7 @@ export function take<TSourceElement, TSourceTraits extends Traits>(
 }
 
 export function throwError(error: any, scheduler?: root.SchedulerLike) {
-  return (root.throwError(error, scheduler) as unknown) as ObservableWithTraits<
+  return root.throwError(error, scheduler) as ObservableWithTraits<
     never,
     {
       async: false;
