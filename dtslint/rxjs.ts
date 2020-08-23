@@ -20,7 +20,7 @@ declare function as<T extends Traits, K extends keyof Traits>(
   key: K
 ): T[K];
 
-describe("rxjs", () => {
+describe("map", () => {
   it("should support map()", () => {
     const source = of(1, 2, 3);
     const result = source.pipe(map((value) => JSON.stringify(value)));
@@ -34,7 +34,9 @@ describe("rxjs", () => {
     const max = as(result, "max"); // $ExpectType 0
     const min = as(result, "min"); // $ExpectType 0
   });
+});
 
+describe("skip", () => {
   it("should support skip(1)", () => {
     const source = of(1, 2, 3);
     const result = source.pipe(skip(1));
@@ -46,7 +48,9 @@ describe("rxjs", () => {
     const result = source.pipe(skip(1));
     const max = as(result, "max"); // $ExpectType undefined
   });
+});
 
+describe("take", () => {
   it("should support take(1)", () => {
     const source = of(1, 2, 3);
     const result = source.pipe(take(1));
