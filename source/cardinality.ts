@@ -5,6 +5,7 @@
 
 export type Cardinality = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 type N = undefined;
+type Argument = number | N;
 
 type Additions = [
   [0, 1, 2, 3, 4, 5, 6, 7, 8],
@@ -31,8 +32,8 @@ type Subtractions = [
 ];
 
 export type Add<
-  TLeft extends number,
-  TRight extends number
+  TLeft extends Argument,
+  TRight extends Argument
 > = TLeft extends Cardinality
   ? TRight extends Cardinality
     ? Additions[TLeft][TRight]
@@ -40,8 +41,8 @@ export type Add<
   : N;
 
 export type Subtract<
-  TLeft extends number,
-  TRight extends number
+  TLeft extends Argument,
+  TRight extends Argument
 > = TLeft extends Cardinality
   ? TRight extends Cardinality
     ? Subtractions[TLeft][TRight]
@@ -49,8 +50,8 @@ export type Subtract<
   : N;
 
 export type Max<
-  TLeft extends number,
-  TRight extends number
+  TLeft extends Argument,
+  TRight extends Argument
 > = TLeft extends Cardinality
   ? TRight extends Cardinality
     ? Subtract<TLeft, TRight> extends N
@@ -60,8 +61,8 @@ export type Max<
   : N;
 
 export type Min<
-  TLeft extends number,
-  TRight extends number
+  TLeft extends Argument,
+  TRight extends Argument
 > = TLeft extends Cardinality
   ? TRight extends Cardinality
     ? Subtract<TLeft, TRight> extends N

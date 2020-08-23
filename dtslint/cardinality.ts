@@ -28,6 +28,11 @@ describe("Add", () => {
     const a = as<Add<1, -1>>(); // $ExpectType undefined
     const b = as<Add<1, 9>>(); // $ExpectType undefined
   });
+
+  it("should resolve as undefined for undefined arguments", () => {
+    const a = as<Add<1, undefined>>(); // $ExpectType undefined
+    const b = as<Add<undefined, 1>>(); // $ExpectType undefined
+  });
 });
 
 describe("Element", () => {
@@ -68,6 +73,11 @@ describe("Max", () => {
     const a = as<Max<1, 9>>(); // $ExpectType undefined
     const b = as<Max<9, 1>>(); // $ExpectType undefined
   });
+
+  it("should resolve as undefined for undefined arguments", () => {
+    const a = as<Max<1, undefined>>(); // $ExpectType undefined
+    const b = as<Max<undefined, 1>>(); // $ExpectType undefined
+  });
 });
 
 describe("Min", () => {
@@ -81,6 +91,11 @@ describe("Min", () => {
     const a = as<Min<1, 9>>(); // $ExpectType undefined
     const b = as<Min<9, 1>>(); // $ExpectType undefined
   });
+
+  it("should resolve as undefined for undefined arguments", () => {
+    const a = as<Min<1, undefined>>(); // $ExpectType undefined
+    const b = as<Min<undefined, 1>>(); // $ExpectType undefined
+  });
 });
 
 describe("Subtract", () => {
@@ -92,5 +107,10 @@ describe("Subtract", () => {
   it("should resolve as undefined for out-of-range cardinalities", () => {
     const a = as<Subtract<1, 2>>(); // $ExpectType undefined
     const b = as<Subtract<9, 1>>(); // $ExpectType undefined
+  });
+
+  it("should resolve as undefined for undefined arguments", () => {
+    const a = as<Subtract<1, undefined>>(); // $ExpectType undefined
+    const b = as<Subtract<undefined, 1>>(); // $ExpectType undefined
   });
 });

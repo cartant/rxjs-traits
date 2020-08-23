@@ -5,23 +5,21 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
-import { Element, Length } from "./cardinality";
-import { Traits } from "./traits";
+import { Element, Length, Subtract } from "./cardinality";
+import { Traits, WithMax } from "./traits";
 
-type ObservableWithTraits<TElement, TTraits extends Traits> = root.Observable<
-  TElement
-> &
-  TTraits & {
-    pipe<TResultElement, TResultTraits extends Traits>(
-      operator: OperatorFunctionWithTraits<
-        TElement,
-        TTraits,
-        TResultElement,
-        TResultTraits
-      >
-    ): ObservableWithTraits<TResultElement, TResultTraits>;
-  };
-type OperatorFunctionWithTraits<
+export type ObservableWithTraits<TElement, TTraits extends Traits> = {
+  pipe<TResultElement, TResultTraits extends Traits>(
+    operator: OperatorFunctionWithTraits<
+      TElement,
+      TTraits,
+      TResultElement,
+      TResultTraits
+    >
+  ): ObservableWithTraits<TResultElement, TResultTraits>;
+} & TTraits;
+
+export type OperatorFunctionWithTraits<
   TSourceElement,
   TSourceTraits extends Traits,
   TResultElement,
@@ -30,7 +28,7 @@ type OperatorFunctionWithTraits<
   source: ObservableWithTraits<TSourceElement, TSourceTraits>
 ) => ObservableWithTraits<TResultElement, TResultTraits>;
 
-export const EMPTY = root.EMPTY as ObservableWithTraits<
+export const EMPTY = (root.EMPTY as unknown) as ObservableWithTraits<
   never,
   {
     async: false;
@@ -41,7 +39,7 @@ export const EMPTY = root.EMPTY as ObservableWithTraits<
   }
 >;
 
-export const NEVER = root.NEVER as ObservableWithTraits<
+export const NEVER = (root.NEVER as unknown) as ObservableWithTraits<
   never,
   {
     async: false;
@@ -77,14 +75,14 @@ export function from<O extends root.ObservableInput<unknown>>(
   }
 >;
 export function from<O extends root.ObservableInput<unknown>>(input: O) {
-  return root.from(input);
+  return root.from(input) as unknown;
 }
 
 export function interval(
   period = 0,
   scheduler: root.SchedulerLike = root.asyncScheduler
 ) {
-  return root.interval(period, scheduler) as ObservableWithTraits<
+  return (root.interval(period, scheduler) as unknown) as ObservableWithTraits<
     number,
     {
       async: true;
@@ -103,17 +101,20 @@ export function map<
 >(
   project: (value: TSourceElement, index: number) => TResultElement,
   thisArg?: any
-): OperatorFunctionWithTraits<
-  TSourceElement,
-  TSourceTraits,
-  TResultElement,
-  TSourceTraits
-> {
-  return operators.map(project, thisArg) as any;
+) {
+  return (operators.map(
+    project,
+    thisArg
+  ) as unknown) as OperatorFunctionWithTraits<
+    TSourceElement,
+    TSourceTraits,
+    TResultElement,
+    TSourceTraits
+  >;
 }
 
 export function of<A extends unknown[]>(...args: A) {
-  return root.of(...args) as ObservableWithTraits<
+  return (root.of(...args) as unknown) as ObservableWithTraits<
     Element<A>,
     {
       async: false;
@@ -125,16 +126,44 @@ export function of<A extends unknown[]>(...args: A) {
   >;
 }
 
-export function skip<T>(count: number) {
-  return operators.skip<T>(count);
+export function skip<TSourceElement, TSourceTraits extends Traits>(
+  count: 1
+): OperatorFunctionWithTraits<
+  TSourceElement,
+  TSourceTraits,
+  TSourceElement,
+  WithMax<TSourceTraits, Subtract<TSourceTraits["max"], 1>>
+>;
+export function skip<TSourceElement, TSourceTraits extends Traits>(
+  count: number
+): OperatorFunctionWithTraits<
+  TSourceElement,
+  TSourceTraits,
+  TSourceElement,
+  TSourceTraits
+>;
+export function skip<TSourceElement, TSourceTraits extends Traits>(
+  count: number
+) {
+  return operators.skip<TSourceElement>(count) as unknown;
 }
 
-export function take<T>(count: number) {
-  return operators.take<T>(count);
+export function take<TSourceElement, TSourceTraits extends Traits>(
+  count: number
+): OperatorFunctionWithTraits<
+  TSourceElement,
+  TSourceTraits,
+  TSourceElement,
+  TSourceTraits
+>;
+export function take<TSourceElement, TSourceTraits extends Traits>(
+  count: number
+) {
+  return operators.take<TSourceElement>(count) as unknown;
 }
 
 export function throwError(error: any, scheduler?: root.SchedulerLike) {
-  return root.throwError(error, scheduler) as ObservableWithTraits<
+  return (root.throwError(error, scheduler) as unknown) as ObservableWithTraits<
     never,
     {
       async: false;
@@ -177,6 +206,6 @@ export function timer(
   dueTime: number | Date = 0,
   periodOrScheduler?: number | root.SchedulerLike,
   scheduler?: root.SchedulerLike
-): root.Observable<number> {
-  return root.timer(dueTime, periodOrScheduler, scheduler);
+) {
+  return root.timer(dueTime, periodOrScheduler, scheduler) as unknown;
 }
