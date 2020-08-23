@@ -11,20 +11,15 @@ import { Traits, WithMax, WithMin } from "./traits";
 export interface ObservableWithTraits<TElement, TTraits extends Traits>
   extends root.Observable<TElement> {
   pipe(): ObservableWithTraits<TElement, TTraits>;
-  pipe<TResultElement, TResultTraits extends Traits>(
+  pipe<T1Element, T1Traits extends Traits>(
     operator1: OperatorFunctionWithTraits<
       TElement,
       TTraits,
-      TResultElement,
-      TResultTraits
+      T1Element,
+      T1Traits
     >
-  ): ObservableWithTraits<TResultElement, TResultTraits>;
-  pipe<
-    T1Element,
-    T1Traits extends Traits,
-    TResultElement,
-    TResultTraits extends Traits
-  >(
+  ): ObservableWithTraits<T1Element, T1Traits>;
+  pipe<T1Element, T1Traits extends Traits, T2Element, T2Traits extends Traits>(
     operator1: OperatorFunctionWithTraits<
       TElement,
       TTraits,
@@ -34,17 +29,17 @@ export interface ObservableWithTraits<TElement, TTraits extends Traits>
     operator2: OperatorFunctionWithTraits<
       T1Element,
       T1Traits,
-      TResultElement,
-      TResultTraits
+      T2Element,
+      T2Traits
     >
-  ): ObservableWithTraits<TResultElement, TResultTraits>;
+  ): ObservableWithTraits<T2Element, T2Traits>;
   pipe<
     T1Element,
     T1Traits extends Traits,
     T2Element,
     T2Traits extends Traits,
-    TResultElement,
-    TResultTraits extends Traits
+    T3Element,
+    T3Traits extends Traits
   >(
     operator1: OperatorFunctionWithTraits<
       TElement,
@@ -61,10 +56,10 @@ export interface ObservableWithTraits<TElement, TTraits extends Traits>
     operator3: OperatorFunctionWithTraits<
       T2Element,
       T2Traits,
-      TResultElement,
-      TResultTraits
+      T3Element,
+      T3Traits
     >
-  ): ObservableWithTraits<TResultElement, TResultTraits>;
+  ): ObservableWithTraits<T3Element, T3Traits>;
   pipe<
     T1Element,
     T1Traits extends Traits,
@@ -72,8 +67,8 @@ export interface ObservableWithTraits<TElement, TTraits extends Traits>
     T2Traits extends Traits,
     T3Element,
     T3Traits extends Traits,
-    TResultElement,
-    TResultTraits extends Traits
+    T4Element,
+    T4Traits extends Traits
   >(
     operator1: OperatorFunctionWithTraits<
       TElement,
@@ -96,10 +91,10 @@ export interface ObservableWithTraits<TElement, TTraits extends Traits>
     operator4: OperatorFunctionWithTraits<
       T3Element,
       T3Traits,
-      TResultElement,
-      TResultTraits
+      T4Element,
+      T4Traits
     >
-  ): ObservableWithTraits<TResultElement, TResultTraits>;
+  ): ObservableWithTraits<T4Element, T4Traits>;
 }
 
 export type OperatorFunctionWithTraits<
