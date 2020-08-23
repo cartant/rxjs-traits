@@ -8,105 +8,118 @@ import * as operators from "rxjs/operators";
 import { Add, Element, Length, Min, Subtract } from "./cardinality";
 import { Traits, WithMax, WithMin } from "./traits";
 
-export interface ObservableWithTraits<TElement, TTraits extends Traits>
-  extends root.Observable<TElement> {
-  pipe(): ObservableWithTraits<TElement, TTraits>;
-  pipe<T1Element, T1Traits extends Traits>(
-    operator1: OperatorFunctionWithTraits<
-      TElement,
-      TTraits,
-      T1Element,
-      T1Traits
-    >
-  ): ObservableWithTraits<T1Element, T1Traits>;
-  pipe<T1Element, T1Traits extends Traits, T2Element, T2Traits extends Traits>(
-    operator1: OperatorFunctionWithTraits<
-      TElement,
-      TTraits,
-      T1Element,
-      T1Traits
-    >,
-    operator2: OperatorFunctionWithTraits<
-      T1Element,
-      T1Traits,
-      T2Element,
-      T2Traits
-    >
-  ): ObservableWithTraits<T2Element, T2Traits>;
+export interface Observable<
+  TElement = unknown,
+  TTraits extends Traits = Traits
+> extends root.Observable<TElement> {
+  pipe(): Observable<TElement, TTraits>;
+  pipe<T1 extends Observable>(
+    operator1: Operator<Observable<TElement, TTraits>, T1>
+  ): T1;
+  pipe<T1 extends Observable, T2 extends Observable>(
+    operator1: Operator<Observable<TElement, TTraits>, T1>,
+    operator2: Operator<T1, T2>
+  ): T2;
+  pipe<T1 extends Observable, T2 extends Observable, T3 extends Observable>(
+    operator1: Operator<Observable<TElement, TTraits>, T1>,
+    operator2: Operator<T1, T2>,
+    operator3: Operator<T2, T3>
+  ): T3;
   pipe<
-    T1Element,
-    T1Traits extends Traits,
-    T2Element,
-    T2Traits extends Traits,
-    T3Element,
-    T3Traits extends Traits
+    T1 extends Observable,
+    T2 extends Observable,
+    T3 extends Observable,
+    T4 extends Observable
   >(
-    operator1: OperatorFunctionWithTraits<
-      TElement,
-      TTraits,
-      T1Element,
-      T1Traits
-    >,
-    operator2: OperatorFunctionWithTraits<
-      T1Element,
-      T1Traits,
-      T2Element,
-      T2Traits
-    >,
-    operator3: OperatorFunctionWithTraits<
-      T2Element,
-      T2Traits,
-      T3Element,
-      T3Traits
-    >
-  ): ObservableWithTraits<T3Element, T3Traits>;
+    operator1: Operator<Observable<TElement, TTraits>, T1>,
+    operator2: Operator<T1, T2>,
+    operator3: Operator<T2, T3>,
+    operator4: Operator<T3, T4>
+  ): T4;
   pipe<
-    T1Element,
-    T1Traits extends Traits,
-    T2Element,
-    T2Traits extends Traits,
-    T3Element,
-    T3Traits extends Traits,
-    T4Element,
-    T4Traits extends Traits
+    T1 extends Observable,
+    T2 extends Observable,
+    T3 extends Observable,
+    T4 extends Observable,
+    T5 extends Observable
   >(
-    operator1: OperatorFunctionWithTraits<
-      TElement,
-      TTraits,
-      T1Element,
-      T1Traits
-    >,
-    operator2: OperatorFunctionWithTraits<
-      T1Element,
-      T1Traits,
-      T2Element,
-      T2Traits
-    >,
-    operator3: OperatorFunctionWithTraits<
-      T2Element,
-      T2Traits,
-      T3Element,
-      T3Traits
-    >,
-    operator4: OperatorFunctionWithTraits<
-      T3Element,
-      T3Traits,
-      T4Element,
-      T4Traits
-    >
-  ): ObservableWithTraits<T4Element, T4Traits>;
+    operator1: Operator<Observable<TElement, TTraits>, T1>,
+    operator2: Operator<T1, T2>,
+    operator3: Operator<T2, T3>,
+    operator4: Operator<T3, T4>,
+    operator5: Operator<T4, T5>
+  ): T5;
+  pipe<
+    T1 extends Observable,
+    T2 extends Observable,
+    T3 extends Observable,
+    T4 extends Observable,
+    T5 extends Observable,
+    T6 extends Observable
+  >(
+    operator1: Operator<Observable<TElement, TTraits>, T1>,
+    operator2: Operator<T1, T2>,
+    operator3: Operator<T2, T3>,
+    operator4: Operator<T3, T4>,
+    operator5: Operator<T4, T5>,
+    operator6: Operator<T5, T6>
+  ): T6;
+  pipe<
+    T1 extends Observable,
+    T2 extends Observable,
+    T3 extends Observable,
+    T4 extends Observable,
+    T5 extends Observable,
+    T6 extends Observable,
+    T7 extends Observable
+  >(
+    operator1: Operator<Observable<TElement, TTraits>, T1>,
+    operator2: Operator<T1, T2>,
+    operator3: Operator<T2, T3>,
+    operator4: Operator<T3, T4>,
+    operator5: Operator<T4, T5>,
+    operator6: Operator<T5, T6>,
+    operator7: Operator<T6, T7>
+  ): T7;
+  pipe<
+    T1 extends Observable,
+    T2 extends Observable,
+    T3 extends Observable,
+    T4 extends Observable,
+    T5 extends Observable,
+    T6 extends Observable,
+    T7 extends Observable,
+    T8 extends Observable
+  >(
+    operator1: Operator<Observable<TElement, TTraits>, T1>,
+    operator2: Operator<T1, T2>,
+    operator3: Operator<T2, T3>,
+    operator4: Operator<T3, T4>,
+    operator5: Operator<T4, T5>,
+    operator6: Operator<T5, T6>,
+    operator7: Operator<T6, T7>,
+    operator8: Operator<T7, T8>
+  ): T8;
 }
 
-export type OperatorFunctionWithTraits<
-  TSourceElement,
-  TSourceTraits extends Traits,
-  TResultElement,
-  TResultTraits extends Traits
-> = (
-  source: ObservableWithTraits<TSourceElement, TSourceTraits>
-) => ObservableWithTraits<TResultElement, TResultTraits>;
+type ObservableElement<TObservable> = TObservable extends Observable<
+  infer TElement,
+  Traits
+>
+  ? TElement
+  : never;
+type ObservableTraits<TObservable> = TObservable extends Observable<
+  unknown,
+  infer TTraits
+>
+  ? TTraits
+  : never;
 
-export const EMPTY = root.EMPTY as ObservableWithTraits<
+export type Operator<TSource extends Observable, TResult extends Observable> = (
+  source: TSource
+) => TResult;
+
+export const EMPTY = root.EMPTY as Observable<
   never,
   {
     async: false;
@@ -117,7 +130,7 @@ export const EMPTY = root.EMPTY as ObservableWithTraits<
   }
 >;
 
-export const NEVER = root.NEVER as ObservableWithTraits<
+export const NEVER = root.NEVER as Observable<
   never,
   {
     async: false;
@@ -130,7 +143,7 @@ export const NEVER = root.NEVER as ObservableWithTraits<
 
 export function from<O extends readonly unknown[]>(
   input: O
-): ObservableWithTraits<
+): Observable<
   Element<O>,
   {
     async: false;
@@ -142,7 +155,7 @@ export function from<O extends readonly unknown[]>(
 >;
 export function from<T>(
   input: Promise<T>
-): ObservableWithTraits<
+): Observable<
   T,
   {
     async: true;
@@ -154,7 +167,7 @@ export function from<T>(
 >;
 export function from<O extends root.ObservableInput<unknown>>(
   input: O
-): ObservableWithTraits<
+): Observable<
   root.ObservedValueOf<O>,
   {
     async: undefined;
@@ -168,12 +181,10 @@ export function from<O extends root.ObservableInput<unknown>>(input: O) {
   return root.from(input);
 }
 
-export function ignoreElements<TSourceElement, TSourceTraits extends Traits>() {
-  return operators.ignoreElements() as OperatorFunctionWithTraits<
-    TSourceElement,
-    TSourceTraits,
-    TSourceElement,
-    WithMax<WithMin<TSourceTraits, 0>, 0>
+export function ignoreElements<TSource extends Observable>() {
+  return operators.ignoreElements() as Operator<
+    TSource,
+    Observable<never, WithMax<WithMin<ObservableTraits<TSource>, 0>, 0>>
   >;
 }
 
@@ -181,7 +192,7 @@ export function interval(
   period = 0,
   scheduler: root.SchedulerLike = root.asyncScheduler
 ) {
-  return root.interval(period, scheduler) as ObservableWithTraits<
+  return root.interval(period, scheduler) as Observable<
     number,
     {
       async: true;
@@ -193,24 +204,21 @@ export function interval(
   >;
 }
 
-export function map<
-  TSourceElement,
-  TSourceTraits extends Traits,
-  TResultElement
->(
-  project: (value: TSourceElement, index: number) => TResultElement,
+export function map<TSource extends Observable, TProjectElement>(
+  project: (
+    value: ObservableElement<TSource>,
+    index: number
+  ) => TProjectElement,
   thisArg?: any
 ) {
-  return operators.map(project, thisArg) as OperatorFunctionWithTraits<
-    TSourceElement,
-    TSourceTraits,
-    TResultElement,
-    TSourceTraits
+  return operators.map(project, thisArg) as Operator<
+    TSource,
+    Observable<TProjectElement, ObservableTraits<TSource>>
   >;
 }
 
 export function of<A extends unknown[]>(...args: A) {
-  return root.of(...args) as ObservableWithTraits<
+  return root.of(...args) as Observable<
     Element<A>,
     {
       async: false;
@@ -222,65 +230,58 @@ export function of<A extends unknown[]>(...args: A) {
   >;
 }
 
-export function skip<TSourceElement, TSourceTraits extends Traits>(
+export function skip<TSource extends Observable>(
   count: 1
-): OperatorFunctionWithTraits<
-  TSourceElement,
-  TSourceTraits,
-  TSourceElement,
-  WithMax<TSourceTraits, Subtract<TSourceTraits["max"], 1>>
+): Operator<
+  TSource,
+  Observable<
+    ObservableElement<TSource>,
+    WithMax<
+      ObservableTraits<TSource>,
+      Subtract<ObservableTraits<TSource>["max"], 1>
+    >
+  >
 >;
-export function skip<TSourceElement, TSourceTraits extends Traits>(
+export function skip<TSource extends Observable>(
   count: number
-): OperatorFunctionWithTraits<
-  TSourceElement,
-  TSourceTraits,
-  TSourceElement,
-  TSourceTraits
->;
-export function skip<TSourceElement, TSourceTraits extends Traits>(
-  count: number
-) {
-  return operators.skip<TSourceElement>(count);
+): Operator<TSource, TSource>;
+export function skip<TSource extends Observable>(count: number) {
+  return operators.skip<ObservableElement<TSource>>(count);
 }
 
-export function startWith<
-  TSourceElement,
-  TSourceTraits extends Traits,
-  TValueElement
->(value: TValueElement) {
-  return operators.startWith(value) as OperatorFunctionWithTraits<
-    TSourceElement,
-    TSourceTraits,
-    TSourceElement | TValueElement,
-    WithMax<TSourceTraits, Add<TSourceTraits["max"], 1>>
+export function startWith<TSource extends Observable, TValueElement>(
+  value: TValueElement
+) {
+  return operators.startWith(value) as Operator<
+    TSource,
+    Observable<
+      ObservableElement<TSource> | TValueElement,
+      WithMax<
+        ObservableTraits<TSource>,
+        Add<ObservableTraits<TSource>["max"], 1>
+      >
+    >
   >;
 }
 
-export function take<TSourceElement, TSourceTraits extends Traits>(
+export function take<TSource extends Observable>(
   count: 1
-): OperatorFunctionWithTraits<
-  TSourceElement,
-  TSourceTraits,
-  TSourceElement,
-  WithMax<TSourceTraits, Min<TSourceTraits["max"], 1>>
+): Operator<
+  TSource,
+  Observable<
+    ObservableElement<TSource>,
+    WithMax<ObservableTraits<TSource>, Min<ObservableTraits<TSource>["max"], 1>>
+  >
 >;
-export function take<TSourceElement, TSourceTraits extends Traits>(
+export function take<TSource extends Observable>(
   count: number
-): OperatorFunctionWithTraits<
-  TSourceElement,
-  TSourceTraits,
-  TSourceElement,
-  TSourceTraits
->;
-export function take<TSourceElement, TSourceTraits extends Traits>(
-  count: number
-) {
-  return operators.take<TSourceElement>(count);
+): Operator<TSource, TSource>;
+export function take<TSource extends Observable>(count: number) {
+  return operators.take<ObservableElement<TSource>>(count);
 }
 
 export function throwError(error: any, scheduler?: root.SchedulerLike) {
-  return root.throwError(error, scheduler) as ObservableWithTraits<
+  return root.throwError(error, scheduler) as Observable<
     never,
     {
       async: false;
@@ -295,7 +296,7 @@ export function throwError(error: any, scheduler?: root.SchedulerLike) {
 export function timer(
   dueTime: number | Date,
   scheduler?: root.SchedulerLike
-): ObservableWithTraits<
+): Observable<
   number,
   {
     async: true;
@@ -309,7 +310,7 @@ export function timer(
   dueTime: number | Date,
   period: number,
   scheduler?: root.SchedulerLike
-): ObservableWithTraits<
+): Observable<
   number,
   {
     async: true;

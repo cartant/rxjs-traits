@@ -8,7 +8,7 @@ import {
   from,
   ignoreElements,
   interval,
-  ObservableWithTraits,
+  Observable,
   map,
   of,
   skip,
@@ -22,7 +22,7 @@ import { Traits } from "../source/traits";
 declare function describe(...args: unknown[]): void;
 declare function it(...args: unknown[]): void;
 declare function as<T extends Traits, K extends keyof Traits>(
-  observable: ObservableWithTraits<unknown, T>,
+  observable: Observable<unknown, T>,
   key: K
 ): T[K];
 

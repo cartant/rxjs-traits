@@ -60,7 +60,8 @@
   },
   "scripts": {
     "dtslint": "eslint \"./dtslint/**/*.ts\"",
-    "lint": "eslint \"./source/**/*.{js,ts}\""
+    "lint": "eslint \"./source/**/*.{js,ts}\"",
+    "test": "yarn run dtslint"
   },
   "sideEffects": false,
   "types": "./dist/esm/index.d.ts",
