@@ -149,6 +149,14 @@ export function skip<TSourceElement, TSourceTraits extends Traits>(
 }
 
 export function take<TSourceElement, TSourceTraits extends Traits>(
+  count: 1
+): OperatorFunctionWithTraits<
+  TSourceElement,
+  TSourceTraits,
+  TSourceElement,
+  WithMax<TSourceTraits, 1>
+>;
+export function take<TSourceElement, TSourceTraits extends Traits>(
   count: number
 ): OperatorFunctionWithTraits<
   TSourceElement,
