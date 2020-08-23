@@ -5,7 +5,7 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
-import { Element, Length, Subtract } from "./cardinality";
+import { Element, Length, Min, Subtract } from "./cardinality";
 import { Traits, WithMax } from "./traits";
 
 export type ObservableWithTraits<TElement, TTraits extends Traits> = {
@@ -154,7 +154,7 @@ export function take<TSourceElement, TSourceTraits extends Traits>(
   TSourceElement,
   TSourceTraits,
   TSourceElement,
-  WithMax<TSourceTraits, 1>
+  WithMax<TSourceTraits, Min<TSourceTraits["max"], 1>>
 >;
 export function take<TSourceElement, TSourceTraits extends Traits>(
   count: number
