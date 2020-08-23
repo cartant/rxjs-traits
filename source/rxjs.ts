@@ -8,16 +8,99 @@ import * as operators from "rxjs/operators";
 import { Element, Length, Min, Subtract } from "./cardinality";
 import { Traits, WithMax } from "./traits";
 
-export type ObservableWithTraits<TElement, TTraits extends Traits> = {
+export interface ObservableWithTraits<TElement, TTraits extends Traits>
+  extends root.Observable<TElement> {
+  pipe(): ObservableWithTraits<TElement, TTraits>;
   pipe<TResultElement, TResultTraits extends Traits>(
-    operator: OperatorFunctionWithTraits<
+    operator1: OperatorFunctionWithTraits<
       TElement,
       TTraits,
       TResultElement,
       TResultTraits
     >
   ): ObservableWithTraits<TResultElement, TResultTraits>;
-} & TTraits;
+  pipe<
+    T1Element,
+    T1Traits extends Traits,
+    TResultElement,
+    TResultTraits extends Traits
+  >(
+    operator1: OperatorFunctionWithTraits<
+      TElement,
+      TTraits,
+      T1Element,
+      T1Traits
+    >,
+    operator2: OperatorFunctionWithTraits<
+      T1Element,
+      T1Traits,
+      TResultElement,
+      TResultTraits
+    >
+  ): ObservableWithTraits<TResultElement, TResultTraits>;
+  pipe<
+    T1Element,
+    T1Traits extends Traits,
+    T2Element,
+    T2Traits extends Traits,
+    TResultElement,
+    TResultTraits extends Traits
+  >(
+    operator1: OperatorFunctionWithTraits<
+      TElement,
+      TTraits,
+      T1Element,
+      T1Traits
+    >,
+    operator2: OperatorFunctionWithTraits<
+      T1Element,
+      T1Traits,
+      T2Element,
+      T2Traits
+    >,
+    operator3: OperatorFunctionWithTraits<
+      T2Element,
+      T2Traits,
+      TResultElement,
+      TResultTraits
+    >
+  ): ObservableWithTraits<TResultElement, TResultTraits>;
+  pipe<
+    T1Element,
+    T1Traits extends Traits,
+    T2Element,
+    T2Traits extends Traits,
+    T3Element,
+    T3Traits extends Traits,
+    TResultElement,
+    TResultTraits extends Traits
+  >(
+    operator1: OperatorFunctionWithTraits<
+      TElement,
+      TTraits,
+      T1Element,
+      T1Traits
+    >,
+    operator2: OperatorFunctionWithTraits<
+      T1Element,
+      T1Traits,
+      T2Element,
+      T2Traits
+    >,
+    operator3: OperatorFunctionWithTraits<
+      T2Element,
+      T2Traits,
+      T3Element,
+      T3Traits
+    >,
+    operator4: OperatorFunctionWithTraits<
+      T3Element,
+      T3Traits,
+      TResultElement,
+      TResultTraits
+    >
+  ): ObservableWithTraits<TResultElement, TResultTraits>;
+}
 
 export type OperatorFunctionWithTraits<
   TSourceElement,
