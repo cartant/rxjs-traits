@@ -21,7 +21,7 @@ describe("Add", () => {
     const a = as<Add<0, 0>>(); // $ExpectType 0
     const b = as<Add<0, 1>>(); // $ExpectType 1
     const c = as<Add<1, 1>>(); // $ExpectType 2
-    const d = as<Add<1, 8>>(); // $ExpectType 9
+    const d = as<Add<1, 8>>(); // $ExpectType undefined
   });
 
   it("should resolve as undefined for out-of-range cardinalities", () => {
