@@ -34,7 +34,16 @@ export function skip<TSource extends Observable, TCount extends Cardinality>(
 >;
 export function skip<TSource extends Observable>(
   count: number
-): Operator<TSource, TSource>;
+): Operator<
+  TSource,
+  Observable<
+    ObservableElement<TSource>,
+    Omit<ObservableTraits<TSource>, "max" | "min"> & {
+      max: undefined;
+      min: undefined;
+    }
+  >
+>;
 export function skip<TSource extends Observable>(count: number) {
   return operators.skip<ObservableElement<TSource>>(count);
 }

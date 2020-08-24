@@ -26,6 +26,15 @@ describe("skip", () => {
     const min = as(result, "min"); // $ExpectType 1
   });
 
+  it("should support skip(number)", () => {
+    const source = of(1, 2, 3);
+    const result = source.pipe(skip(1 as number));
+    const async = as(result, "async"); // $ExpectType false
+    const complete = as(result, "complete"); // $ExpectType true
+    const max = as(result, "max"); // $ExpectType undefined
+    const min = as(result, "min"); // $ExpectType undefined
+  });
+
   it("should support skip(1) from EMPTY", () => {
     const source = EMPTY;
     const result = source.pipe(skip(1));
