@@ -48,7 +48,7 @@ describe("from", () => {
     const async = as(source, "async"); // $ExpectType true
     const complete = as(source, "complete"); // $ExpectType undefined
     const max = as(source, "max"); // $ExpectType 1
-    const min = as(source, "min"); // $ExpectType 0
+    const min = as(source, "min"); // $ExpectType 1
   });
 });
 
@@ -69,7 +69,7 @@ describe("interval", () => {
     const async = as(source, "async"); // $ExpectType true
     const complete = as(source, "complete"); // $ExpectType false
     const max = as(source, "max"); // $ExpectType undefined
-    const min = as(source, "min"); // $ExpectType 0
+    const min = as(source, "min"); // $ExpectType 1
   });
 });
 
@@ -166,7 +166,7 @@ describe("timer", () => {
     const async = as(source, "async"); // $ExpectType true
     const complete = as(source, "complete"); // $ExpectType true
     const max = as(source, "max"); // $ExpectType 1
-    const min = as(source, "min"); // $ExpectType 0
+    const min = as(source, "min"); // $ExpectType 1
   });
 
   it("should support timer with period", () => {
@@ -174,6 +174,6 @@ describe("timer", () => {
     const async = as(source, "async"); // $ExpectType true
     const complete = as(source, "complete"); // $ExpectType false
     const max = as(source, "max"); // $ExpectType undefined
-    const min = as(source, "min"); // $ExpectType 0
+    const min = as(source, "min"); // $ExpectType 1
   });
 });

@@ -162,7 +162,7 @@ export function from<T>(
     complete: undefined;
     error: undefined;
     max: 1;
-    min: 0;
+    min: 1;
   }
 >;
 export function from<O extends root.ObservableInput<unknown>>(
@@ -199,7 +199,7 @@ export function interval(
       complete: false;
       error: undefined;
       max: undefined;
-      min: 0;
+      min: 1;
     }
   >;
 }
@@ -303,7 +303,7 @@ export function timer(
     complete: true;
     error: undefined;
     max: 1;
-    min: 0;
+    min: 1;
   }
 >;
 export function timer(
@@ -317,7 +317,7 @@ export function timer(
     complete: false;
     error: undefined;
     max: undefined;
-    min: 0;
+    min: 1;
   }
 >;
 export function timer(
