@@ -1,0 +1,33 @@
+/**
+ * @license Use of this source code is governed by an MIT-style license that
+ * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
+ */
+
+import { EMPTY, from } from "../../../source/rxjs";
+import { as } from "../as";
+
+describe("from", () => {
+  it("should support from", () => {
+    const source = from(EMPTY);
+    const async = as(source, "async"); // $ExpectType undefined
+    const complete = as(source, "complete"); // $ExpectType undefined
+    const max = as(source, "max"); // $ExpectType undefined
+    const min = as(source, "min"); // $ExpectType 0
+  });
+
+  it("should support from with array", () => {
+    const source = from([1, 2, 3] as const);
+    const async = as(source, "async"); // $ExpectType false
+    const complete = as(source, "complete"); // $ExpectType true
+    const max = as(source, "max"); // $ExpectType 3
+    const min = as(source, "min"); // $ExpectType 3
+  });
+
+  it("should support from with promise", () => {
+    const source = from(Promise.resolve("alice"));
+    const async = as(source, "async"); // $ExpectType true
+    const complete = as(source, "complete"); // $ExpectType undefined
+    const max = as(source, "max"); // $ExpectType 1
+    const min = as(source, "min"); // $ExpectType 1
+  });
+});
