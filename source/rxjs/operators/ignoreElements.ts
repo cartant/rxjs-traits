@@ -4,12 +4,17 @@
  */
 
 import * as operators from "rxjs/operators";
-import { WithMax, WithMin } from "../../traits";
 import { Observable, ObservableTraits, Operator } from "../Observable";
 
 export function ignoreElements<TSource extends Observable>() {
   return operators.ignoreElements() as Operator<
     TSource,
-    Observable<never, WithMax<WithMin<ObservableTraits<TSource>, 0>, 0>>
+    Observable<
+      never,
+      Omit<ObservableTraits<TSource>, "max" | "min"> & {
+        max: 0;
+        min: 0;
+      }
+    >
   >;
 }

@@ -5,7 +5,6 @@
 
 import * as operators from "rxjs/operators";
 import { Add } from "../../cardinality";
-import { WithMax } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -20,10 +19,10 @@ export function startWith<TSource extends Observable, TValueElement>(
     TSource,
     Observable<
       ObservableElement<TSource> | TValueElement,
-      WithMax<
-        ObservableTraits<TSource>,
-        Add<ObservableTraits<TSource>["max"], 1>
-      >
+      Omit<ObservableTraits<TSource>, "max" | "min"> & {
+        max: Add<ObservableTraits<TSource>["max"], 1>;
+        min: Add<ObservableTraits<TSource>["min"], 1>;
+      }
     >
   >;
 }

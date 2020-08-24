@@ -14,5 +14,6 @@ describe("startWith", () => {
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
     const max = as(result, "max"); // $ExpectType 4
+    const min = as(result, "min"); // $ExpectType 4
   });
 });
