@@ -30,7 +30,7 @@ export function timer(
     complete: false;
     error: undefined;
     max: undefined;
-    min: 1;
+    min: undefined;
   }
 >;
 export function timer(

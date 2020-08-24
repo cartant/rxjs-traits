@@ -42,13 +42,16 @@ export type Add<
     : N
   : N;
 
-export type Subtract<
-  TLeft extends Argument,
-  TRight extends Argument
-> = TLeft extends Cardinality
-  ? TRight extends Cardinality
-    ? Subtractions[TLeft][TRight]
-    : N
+export type Element<TArrayLike> = TArrayLike extends readonly (infer TElement)[]
+  ? TElement
+  : never;
+
+export type Floor<TValue> = TValue extends number ? TValue : 0;
+
+export type Length<TArrayLike> = TArrayLike extends readonly unknown[]
+  ? number extends TArrayLike["length"]
+    ? N
+    : TArrayLike["length"]
   : N;
 
 export type Max<
@@ -73,12 +76,20 @@ export type Min<
     : N
   : N;
 
-export type Element<TArrayLike> = TArrayLike extends readonly (infer TElement)[]
-  ? TElement
-  : never;
+export type Skip<
+  TLeft extends Argument,
+  TRight extends Argument
+> = TLeft extends Cardinality
+  ? TRight extends Cardinality
+    ? Subtractions[TLeft][TRight]
+    : N
+  : N;
 
-export type Length<TArrayLike> = TArrayLike extends readonly unknown[]
-  ? number extends TArrayLike["length"]
-    ? N
-    : TArrayLike["length"]
+export type Subtract<
+  TLeft extends Argument,
+  TRight extends Argument
+> = TLeft extends Cardinality
+  ? TRight extends Cardinality
+    ? Subtractions[TLeft][TRight]
+    : N
   : N;

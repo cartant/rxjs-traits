@@ -4,8 +4,8 @@
  */
 
 import * as operators from "rxjs/operators";
-import { Subtract } from "../../cardinality";
-import { WithMax } from "../../traits";
+import { Cardinality, Floor, Min, Subtract } from "../../cardinality";
+import { Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -13,16 +13,23 @@ import {
   Operator,
 } from "../Observable";
 
-export function skip<TSource extends Observable>(
-  count: 1
+type Skip<
+  TTraits extends Traits,
+  TSkip extends number
+> = TTraits["max"] extends undefined
+  ? TTraits
+  : Omit<TTraits, "max" | "min"> & {
+      max: Floor<Subtract<TTraits["max"], TSkip>>;
+      min: Min<TTraits["min"], Floor<Subtract<TTraits["max"], TSkip>>>;
+    };
+
+export function skip<TSource extends Observable, TCount extends Cardinality>(
+  count: TCount
 ): Operator<
   TSource,
   Observable<
     ObservableElement<TSource>,
-    WithMax<
-      ObservableTraits<TSource>,
-      Subtract<ObservableTraits<TSource>["max"], 1>
-    >
+    Skip<ObservableTraits<TSource>, TCount>
   >
 >;
 export function skip<TSource extends Observable>(

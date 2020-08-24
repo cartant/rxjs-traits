@@ -17,7 +17,7 @@ export function interval(
       complete: false;
       error: undefined;
       max: undefined;
-      min: 1;
+      min: undefined;
     }
   >;
 }

@@ -6,6 +6,7 @@
 import {
   Add,
   Element,
+  Floor,
   Length,
   Max,
   Min,
@@ -45,6 +46,16 @@ describe("Element", () => {
 
   it("should resolve as never for non-array like types", () => {
     const a = as<Element<1>>(); // $ExpectType never
+  });
+});
+
+describe("Floor", () => {
+  it("should return an in-range cardinality", () => {
+    const a = as<Floor<1>>(); // $ExpectType 1
+  });
+
+  it("should return zero for out-of-range cardinalities", () => {
+    const a = as<Floor<undefined>>(); // $ExpectType 0
   });
 });
 

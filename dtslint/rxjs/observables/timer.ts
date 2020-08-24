@@ -20,6 +20,6 @@ describe("timer", () => {
     const async = as(source, "async"); // $ExpectType true
     const complete = as(source, "complete"); // $ExpectType false
     const max = as(source, "max"); // $ExpectType undefined
-    const min = as(source, "min"); // $ExpectType 1
+    const min = as(source, "min"); // $ExpectType undefined
   });
 });
