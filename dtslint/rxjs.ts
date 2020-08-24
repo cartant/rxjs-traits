@@ -19,8 +19,6 @@ import {
 } from "../source/rxjs";
 import { Traits } from "../source/traits";
 
-declare function describe(...args: unknown[]): void;
-declare function it(...args: unknown[]): void;
 declare function as<T extends Traits, K extends keyof Traits>(
   observable: Observable<unknown, T>,
   key: K

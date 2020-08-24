@@ -12,8 +12,6 @@ import {
   Subtract,
 } from "../source/cardinality";
 
-declare function describe(...args: unknown[]): void;
-declare function it(...args: unknown[]): void;
 declare function as<T>(): T;
 
 describe("Add", () => {
