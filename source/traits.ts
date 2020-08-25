@@ -42,7 +42,7 @@ export type Some<TUnion extends true | false | undefined> = Exclude<
   TUnion,
   false | undefined
 > extends never
-  ? Exclude<TUnion, false> extends false
+  ? Exclude<TUnion, false> extends never
     ? false
     : undefined
   : true;
