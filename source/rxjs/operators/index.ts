@@ -7,6 +7,7 @@ export * from "./filter";
 export * from "./first";
 export * from "./ignoreElements";
 export * from "./map";
+export * from "./mergeMap";
 export * from "./observeOn";
 export * from "./single";
 export * from "./skip";
