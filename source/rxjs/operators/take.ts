@@ -23,9 +23,11 @@ export function take<TSource extends Observable>(
     }
   >
 >;
+
 export function take<TSource extends Observable>(
   count: number
 ): Operator<TSource, TSource>;
+
 export function take<TSource extends Observable>(count: number) {
   return operators.take<ObservableElement<TSource>>(count);
 }

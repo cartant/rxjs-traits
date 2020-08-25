@@ -6,8 +6,11 @@
 import * as root from "rxjs";
 import { Traits } from "../traits";
 
+const traits = Symbol("traits");
+
 export interface Observable<TElement = unknown, TTraits extends Traits = Traits>
   extends root.Observable<TElement> {
+  readonly [traits]: TTraits;
   pipe(): Observable<TElement, TTraits>;
   pipe<T1 extends Observable>(
     operator1: Operator<Observable<TElement, TTraits>, T1>

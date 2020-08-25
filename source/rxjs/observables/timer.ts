@@ -19,6 +19,7 @@ export function timer(
     min: 1;
   }
 >;
+
 export function timer(
   dueTime: number | Date,
   period: number,
@@ -33,6 +34,7 @@ export function timer(
     min: undefined;
   }
 >;
+
 export function timer(
   dueTime: number | Date = 0,
   periodOrScheduler?: number | root.SchedulerLike,

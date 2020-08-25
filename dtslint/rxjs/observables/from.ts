@@ -3,6 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
+import * as root from "rxjs";
 import { EMPTY, from } from "../../../source/rxjs";
 import { as } from "../as";
 
@@ -12,7 +13,7 @@ describe("from", () => {
     const async = as(source, "async"); // $ExpectType undefined
     const complete = as(source, "complete"); // $ExpectType undefined
     const max = as(source, "max"); // $ExpectType undefined
-    const min = as(source, "min"); // $ExpectType 0
+    const min = as(source, "min"); // $ExpectType undefined
   });
 
   it("should support from with array", () => {
@@ -29,5 +30,13 @@ describe("from", () => {
     const complete = as(source, "complete"); // $ExpectType undefined
     const max = as(source, "max"); // $ExpectType 1
     const min = as(source, "min"); // $ExpectType 1
+  });
+
+  it("should support from with root observable", () => {
+    const source = from(root.of("alice"));
+    const async = as(source, "async"); // $ExpectType undefined
+    const complete = as(source, "complete"); // $ExpectType undefined
+    const max = as(source, "max"); // $ExpectType undefined
+    const min = as(source, "min"); // $ExpectType undefined
   });
 });

@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-import { asapScheduler } from "rxjs";
+import * as root from "rxjs";
 import { of } from "../../../source/rxjs";
 import { subscribeOn } from "../../../source/rxjs/operators";
 import { as } from "../as";
@@ -11,7 +11,7 @@ import { as } from "../as";
 describe("subscribeOn", () => {
   it("should support subscribeOn", () => {
     const source = of(1, 2, 3);
-    const result = source.pipe(subscribeOn(asapScheduler));
+    const result = source.pipe(subscribeOn(root.asapScheduler));
     const async = as(result, "async"); // $ExpectType true
     const complete = as(result, "complete"); // $ExpectType true
     const max = as(result, "max"); // $ExpectType 3

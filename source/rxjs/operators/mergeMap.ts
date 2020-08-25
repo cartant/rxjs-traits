@@ -5,6 +5,7 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
+import { All, AsUnion, Some, Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -12,24 +13,71 @@ import {
   Operator,
 } from "../Observable";
 
+type Merge<TSourceTraits extends Traits, TInnerTraits extends Traits> = {
+  async: Some<AsUnion<[TSourceTraits, TInnerTraits], "async">>;
+  complete: All<AsUnion<[TSourceTraits, TInnerTraits], "complete">>;
+  error: Some<AsUnion<[TSourceTraits, TInnerTraits], "error">>;
+  max: undefined;
+  min: undefined;
+};
+
+export function mergeMap<TSource extends Observable, TInner extends Observable>(
+  project: (value: ObservableElement<TSource>, index: number) => TInner,
+  concurrent?: number
+): Operator<
+  TSource,
+  Observable<
+    ObservableElement<TInner>,
+    Merge<ObservableTraits<TSource>, ObservableTraits<TInner>>
+  >
+>;
+
 export function mergeMap<
   TSource extends Observable,
-  TProjectInput extends root.ObservableInput<unknown>
+  TInner extends Promise<unknown>
 >(
-  project: (value: ObservableElement<TSource>, index: number) => TProjectInput,
+  project: (value: ObservableElement<TSource>, index: number) => TInner,
+  concurrent?: number
+): Operator<
+  TSource,
+  Observable<
+    root.ObservedValueOf<TInner>,
+    {
+      async: true;
+      complete: undefined;
+      error: undefined;
+      max: undefined;
+      min: undefined;
+    }
+  >
+>;
+
+export function mergeMap<
+  TSource extends Observable,
+  TInner extends root.ObservableInput<unknown>
+>(
+  project: (value: ObservableElement<TSource>, index: number) => TInner,
+  concurrent?: number
+): Operator<
+  TSource,
+  Observable<
+    root.ObservedValueOf<TInner>,
+    {
+      async: undefined;
+      complete: undefined;
+      error: undefined;
+      max: undefined;
+      min: undefined;
+    }
+  >
+>;
+
+export function mergeMap<
+  TSource extends Observable,
+  TInner extends root.ObservableInput<unknown>
+>(
+  project: (value: ObservableElement<TSource>, index: number) => TInner,
   concurrent?: number
 ) {
-  return operators.mergeMap(project, concurrent) as Operator<
-    TSource,
-    Observable<
-      root.ObservedValueOf<TProjectInput>,
-      {
-        async: undefined;
-        complete: undefined;
-        error: undefined;
-        max: undefined;
-        min: undefined;
-      }
-    >
-  >;
+  return operators.mergeMap(project, concurrent);
 }

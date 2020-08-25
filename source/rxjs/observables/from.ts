@@ -7,22 +7,23 @@ import * as root from "rxjs";
 import { Element, Length } from "../../cardinality";
 import { Observable } from "../Observable";
 
-export function from<O extends readonly unknown[]>(
-  input: O
+export function from<TInput extends readonly unknown[]>(
+  input: TInput
 ): Observable<
-  Element<O>,
+  Element<TInput>,
   {
     async: false;
     complete: true;
     error: undefined;
-    max: Length<O>;
-    min: Length<O>;
+    max: Length<TInput>;
+    min: Length<TInput>;
   }
 >;
-export function from<T>(
-  input: Promise<T>
+
+export function from<TElement>(
+  input: Promise<TElement>
 ): Observable<
-  T,
+  TElement,
   {
     async: true;
     complete: undefined;
@@ -31,18 +32,22 @@ export function from<T>(
     min: 1;
   }
 >;
-export function from<O extends root.ObservableInput<unknown>>(
-  input: O
+
+export function from<TInput extends root.ObservableInput<unknown>>(
+  input: TInput
 ): Observable<
-  root.ObservedValueOf<O>,
+  root.ObservedValueOf<TInput>,
   {
     async: undefined;
     complete: undefined;
     error: undefined;
     max: undefined;
-    min: 0;
+    min: undefined;
   }
 >;
-export function from<O extends root.ObservableInput<unknown>>(input: O) {
+
+export function from<TInput extends root.ObservableInput<unknown>>(
+  input: TInput
+) {
   return root.from(input);
 }
