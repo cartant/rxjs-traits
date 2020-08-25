@@ -21,6 +21,14 @@ export type DefaultTraits = {
   min: undefined;
 };
 
+export type PromiseTraits = {
+  async: true;
+  complete: undefined;
+  error: undefined;
+  max: undefined;
+  min: undefined;
+};
+
 export type All<TUnion extends true | false | undefined> = Exclude<
   TUnion,
   true

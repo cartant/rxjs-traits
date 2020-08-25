@@ -5,6 +5,7 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
+import { DefaultTraits, PromiseTraits } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -37,16 +38,7 @@ export function concatMap<
   TSource,
   Observable<
     root.ObservedValueOf<TInner>,
-    MergeTraits<
-      ObservableTraits<TSource>,
-      {
-        async: true;
-        complete: undefined;
-        error: undefined;
-        max: undefined;
-        min: undefined;
-      }
-    >
+    MergeTraits<ObservableTraits<TSource>, PromiseTraits>
   >
 >;
 
@@ -60,16 +52,7 @@ export function concatMap<
   TSource,
   Observable<
     root.ObservedValueOf<TInner>,
-    MergeTraits<
-      ObservableTraits<TSource>,
-      {
-        async: undefined;
-        complete: undefined;
-        error: undefined;
-        max: undefined;
-        min: undefined;
-      }
-    >
+    MergeTraits<ObservableTraits<TSource>, DefaultTraits>
   >
 >;
 

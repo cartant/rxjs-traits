@@ -28,8 +28,8 @@ describe("from", () => {
     const source = from(Promise.resolve("alice"));
     const async = as(source, "async"); // $ExpectType true
     const complete = as(source, "complete"); // $ExpectType undefined
-    const max = as(source, "max"); // $ExpectType 1
-    const min = as(source, "min"); // $ExpectType 1
+    const max = as(source, "max"); // $ExpectType undefined
+    const min = as(source, "min"); // $ExpectType undefined
   });
 
   it("should support from with root observable", () => {
