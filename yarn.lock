@@ -1665,15 +1665,6 @@ escodegen@^1.14.1:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-etc@^1.0.0:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/eslint-etc/-/eslint-etc-1.0.2.tgz#d80c6415667dac6c399e4b0c8664d9aad9379b8a"
-  integrity sha512-AOFG/rG+DN3PUWBR/jX+mpnSUTai5qcEq79JKZkDMqR2FNrdLBC9Rn4K+WkGZG2Cg6a+Gi/fof1HzmJW0kvEpg==
-  dependencies:
-    "@typescript-eslint/experimental-utils" "^3.2.0"
-    tsutils "^3.17.1"
-    tsutils-etc "^1.2.2"
-
 eslint-etc@^2.0.0:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/eslint-etc/-/eslint-etc-2.2.1.tgz#21b86adc6db950532700a62eebc8a9ed9ff7f514"
@@ -1712,9 +1703,9 @@ eslint-plugin-dtslint@^1.0.1:
     tsutils "^3.17.1"
 
 eslint-plugin-etc@^0.0.1-beta.34:
-  version "0.0.1-beta.43"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-etc/-/eslint-plugin-etc-0.0.1-beta.43.tgz#0d8273457d701863cee7cbba47b7cf64086b8798"
-  integrity sha512-zcuyN+rnX2ihdQsTXAAgBBUZyb9CMZC0/wo4fZqOTZ6z7KpWROpja2svRdNTYw8fl/FiU1/p25LRPPYfWyeVTA==
+  version "0.0.1-beta.44"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-etc/-/eslint-plugin-etc-0.0.1-beta.44.tgz#da41608ddd39b2774f6a6d6a56c23d24a12bff05"
+  integrity sha512-TFdHeoczdmUQdAEmtYXqK/skFruuuHt+ALzFTCpceA8KSvbLOZAL1WDWEWlzX2B0kRzKM9xOoLzZPRmkrIzJxg==
   dependencies:
     "@phenomnomnominal/tsquery" "^4.0.0"
     "@typescript-eslint/experimental-utils" "^3.2.0"
@@ -1743,14 +1734,14 @@ eslint-plugin-import@^2.21.2:
     tsconfig-paths "^3.9.0"
 
 eslint-plugin-rxjs@^0.0.2-beta.27:
-  version "0.0.2-beta.28"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-rxjs/-/eslint-plugin-rxjs-0.0.2-beta.28.tgz#92039d22ebac00eaaeb0286520a240f56f1cafd5"
-  integrity sha512-8923dmXdsF6JxUGIYmxSL0nAAtWdsa0BXIY6FwJ2yilumQF37jEiNo59Bw5Azvx3nNmAR6oNl/PUfhXBDpwzRg==
+  version "0.0.2-beta.29"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-rxjs/-/eslint-plugin-rxjs-0.0.2-beta.29.tgz#c28d89acf49c85124ae441b8fc7de1b736050519"
+  integrity sha512-6wCZbqjHBHI2Q1RKSPZivG7rb0K+iFJfyHryCmqcJsVuPGEt9Z0nhALQzGjr7UDGbTXlJzEXjloU0vtV86R4EQ==
   dependencies:
     "@typescript-eslint/experimental-utils" "^3.2.0"
     common-tags "^1.8.0"
     decamelize "^4.0.0"
-    eslint-etc "^1.0.0"
+    eslint-etc "^2.0.0"
     requireindex "~1.2.0"
     rxjs-report-usage "^1.0.4"
     tslib "^2.0.0"
