@@ -5,11 +5,13 @@
 
 import * as root from "rxjs";
 import { Traits } from "../traits";
-
 const traits = Symbol("traits");
 
 export interface Observable<TElement = unknown, TTraits extends Traits = Traits>
   extends root.Observable<TElement> {
+  // The traits property is never used. It exists solely to serve as a
+  // structural differentiator between Observable and root.Observable.
+  // Without it, `root.Observable extends Observable` resolves as `true`.
   readonly [traits]: TTraits;
   pipe(): Observable<TElement, TTraits>;
   pipe<T1 extends Observable>(
