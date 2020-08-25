@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-import { All, Union, DefaultTraits, Some } from "../source/traits";
+import { All, DefaultTraits, Some, Union } from "../source/traits";
 
 declare function as<T>(): T;
 
