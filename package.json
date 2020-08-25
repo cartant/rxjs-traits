@@ -24,7 +24,7 @@
     "husky": "^4.0.0",
     "jest": "^26.4.2",
     "lint-staged": "^10.0.8",
-    "prettier": "~2.0.0",
+    "prettier": "~2.1.0",
     "rimraf": "^3.0.0",
     "rxjs": "^6.5.1",
     "typescript": "^4.0.2"
@@ -63,6 +63,9 @@
   "scripts": {
     "dtslint": "eslint \"./dtslint/**/*.ts\"",
     "lint": "eslint \"./source/**/*.{js,ts}\"",
+    "prepublishOnly": "yarn run test && yarn run dist",
+    "prettier": "prettier --write \"./{dtslint,source}/**/*.{js,json,ts}\"",
+    "prettier:ci": "prettier --check \"./{dtslint,source}/**/*.{js,json,ts}\"",
     "test": "yarn run dtslint"
   },
   "sideEffects": false,
