@@ -12,7 +12,7 @@ import {
 } from "../Observable";
 
 export function first<TSource extends Observable>() {
-  return operators.first() as Operator<
+  return (operators.first() as unknown) as Operator<
     TSource,
     Observable<
       ObservableElement<TSource>,

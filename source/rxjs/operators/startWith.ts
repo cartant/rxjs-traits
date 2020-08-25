@@ -15,7 +15,7 @@ import {
 export function startWith<TSource extends Observable, TValueElement>(
   value: TValueElement
 ) {
-  return operators.startWith(value) as Operator<
+  return (operators.startWith(value) as unknown) as Operator<
     TSource,
     Observable<
       ObservableElement<TSource> | TValueElement,

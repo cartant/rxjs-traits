@@ -14,7 +14,7 @@ import {
 export function filter<TSource extends Observable>(
   predicate: (value: ObservableElement<TSource>) => boolean
 ) {
-  return operators.filter(predicate) as Operator<
+  return (operators.filter(predicate) as unknown) as Operator<
     TSource,
     Observable<
       ObservableElement<TSource>,

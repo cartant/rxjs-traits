@@ -15,7 +15,7 @@ import {
 export function subscribeOn<TSource extends Observable>(
   scheduler: root.SchedulerLike
 ) {
-  return operators.subscribeOn(scheduler) as Operator<
+  return (operators.subscribeOn(scheduler) as unknown) as Operator<
     TSource,
     Observable<
       ObservableElement<TSource>,

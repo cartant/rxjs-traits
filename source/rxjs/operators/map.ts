@@ -18,7 +18,7 @@ export function map<TSource extends Observable, TProjectElement>(
   ) => TProjectElement,
   thisArg?: any
 ) {
-  return operators.map(project, thisArg) as Operator<
+  return (operators.map(project, thisArg) as unknown) as Operator<
     TSource,
     Observable<TProjectElement, ObservableTraits<TSource>>
   >;

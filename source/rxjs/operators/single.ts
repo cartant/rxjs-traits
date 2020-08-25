@@ -14,7 +14,7 @@ import {
 export function single<TSource extends Observable>(
   predicate?: (value: ObservableElement<TSource>) => boolean
 ) {
-  return operators.single(predicate) as Operator<
+  return (operators.single(predicate) as unknown) as Operator<
     TSource,
     Observable<
       ObservableElement<TSource>,

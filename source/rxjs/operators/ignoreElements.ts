@@ -7,7 +7,7 @@ import * as operators from "rxjs/operators";
 import { Observable, ObservableTraits, Operator } from "../Observable";
 
 export function ignoreElements<TSource extends Observable>() {
-  return operators.ignoreElements() as Operator<
+  return (operators.ignoreElements() as unknown) as Operator<
     TSource,
     Observable<
       never,
