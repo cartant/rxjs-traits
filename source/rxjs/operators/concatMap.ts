@@ -37,13 +37,16 @@ export function concatMap<
   TSource,
   Observable<
     root.ObservedValueOf<TInner>,
-    {
-      async: true;
-      complete: undefined;
-      error: undefined;
-      max: undefined;
-      min: undefined;
-    }
+    MergeTraits<
+      ObservableTraits<TSource>,
+      {
+        async: true;
+        complete: undefined;
+        error: undefined;
+        max: undefined;
+        min: undefined;
+      }
+    >
   >
 >;
 
@@ -57,13 +60,16 @@ export function concatMap<
   TSource,
   Observable<
     root.ObservedValueOf<TInner>,
-    {
-      async: undefined;
-      complete: undefined;
-      error: undefined;
-      max: undefined;
-      min: undefined;
-    }
+    MergeTraits<
+      ObservableTraits<TSource>,
+      {
+        async: undefined;
+        complete: undefined;
+        error: undefined;
+        max: undefined;
+        min: undefined;
+      }
+    >
   >
 >;
 
