@@ -11,7 +11,7 @@ import {
   ObservableTraits,
   Operator,
 } from "../Observable";
-import { Merge } from "./mergeMap";
+import { MergeTraits } from "./mergeMap";
 
 export function concatMap<
   TSource extends Observable,
@@ -23,7 +23,7 @@ export function concatMap<
   TSource,
   Observable<
     ObservableElement<TInner>,
-    Merge<ObservableTraits<TSource>, ObservableTraits<TInner>>
+    MergeTraits<ObservableTraits<TSource>, ObservableTraits<TInner>>
   >
 >;
 

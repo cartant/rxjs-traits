@@ -5,7 +5,7 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
-import { All, AsUnion, Some, Traits } from "../../traits";
+import { All, Union, Some, Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -13,10 +13,13 @@ import {
   Operator,
 } from "../Observable";
 
-export type Merge<TSourceTraits extends Traits, TInnerTraits extends Traits> = {
-  async: Some<AsUnion<[TSourceTraits, TInnerTraits], "async">>;
-  complete: All<AsUnion<[TSourceTraits, TInnerTraits], "complete">>;
-  error: Some<AsUnion<[TSourceTraits, TInnerTraits], "error">>;
+export type MergeTraits<
+  TSourceTraits extends Traits,
+  TInnerTraits extends Traits
+> = {
+  async: Some<Union<[TSourceTraits, TInnerTraits], "async">>;
+  complete: All<Union<[TSourceTraits, TInnerTraits], "complete">>;
+  error: Some<Union<[TSourceTraits, TInnerTraits], "error">>;
   max: undefined;
   min: undefined;
 };
@@ -28,7 +31,7 @@ export function mergeMap<TSource extends Observable, TInner extends Observable>(
   TSource,
   Observable<
     ObservableElement<TInner>,
-    Merge<ObservableTraits<TSource>, ObservableTraits<TInner>>
+    MergeTraits<ObservableTraits<TSource>, ObservableTraits<TInner>>
   >
 >;
 

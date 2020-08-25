@@ -30,11 +30,6 @@ export type All<TUnion extends true | false | undefined> = Exclude<
   ? false
   : undefined;
 
-export type AsUnion<
-  TTraits extends Traits[],
-  TKey extends keyof Traits
-> = TTraits[number][TKey];
-
 export type Some<TUnion extends true | false | undefined> = Exclude<
   TUnion,
   false | undefined
@@ -43,3 +38,8 @@ export type Some<TUnion extends true | false | undefined> = Exclude<
     ? false
     : undefined
   : true;
+
+export type Union<
+  TTraits extends Traits[],
+  TKey extends keyof Traits
+> = TTraits[number][TKey];
