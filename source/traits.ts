@@ -18,7 +18,7 @@ export type DefaultTraits = {
   complete: undefined;
   error: undefined;
   max: undefined;
-  min: 0;
+  min: undefined;
 };
 
 export type All<TUnion extends true | false | undefined> = Exclude<
