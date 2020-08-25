@@ -5,23 +5,18 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
-import { All, AsUnion, Some, Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
   ObservableTraits,
   Operator,
 } from "../Observable";
+import { Merge } from "./mergeMap";
 
-export type Merge<TSourceTraits extends Traits, TInnerTraits extends Traits> = {
-  async: Some<AsUnion<[TSourceTraits, TInnerTraits], "async">>;
-  complete: All<AsUnion<[TSourceTraits, TInnerTraits], "complete">>;
-  error: Some<AsUnion<[TSourceTraits, TInnerTraits], "error">>;
-  max: undefined;
-  min: undefined;
-};
-
-export function mergeMap<TSource extends Observable, TInner extends Observable>(
+export function concatMap<
+  TSource extends Observable,
+  TInner extends Observable
+>(
   project: (value: ObservableElement<TSource>, index: number) => TInner,
   concurrent?: number
 ): Operator<
@@ -32,7 +27,7 @@ export function mergeMap<TSource extends Observable, TInner extends Observable>(
   >
 >;
 
-export function mergeMap<
+export function concatMap<
   TSource extends Observable,
   TInner extends Promise<unknown>
 >(
@@ -52,7 +47,7 @@ export function mergeMap<
   >
 >;
 
-export function mergeMap<
+export function concatMap<
   TSource extends Observable,
   TInner extends root.ObservableInput<unknown>
 >(
@@ -72,12 +67,12 @@ export function mergeMap<
   >
 >;
 
-export function mergeMap<
+export function concatMap<
   TSource extends Observable,
   TInner extends root.ObservableInput<unknown>
 >(
   project: (value: ObservableElement<TSource>, index: number) => TInner,
   concurrent?: number
 ) {
-  return operators.mergeMap(project, concurrent);
+  return operators.concatMap(project);
 }

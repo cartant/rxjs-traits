@@ -3,14 +3,15 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-export * from "./filter";
-export * from "./first";
-export * from "./ignoreElements";
-export * from "./map";
-export * from "./mergeMap";
-export * from "./observeOn";
-export * from "./single";
-export * from "./skip";
-export * from "./startWith";
-export * from "./subscribeOn";
-export * from "./take";
+export { concatMap } from "./concatMap";
+export { filter } from "./filter";
+export { first } from "./first";
+export { ignoreElements } from "./ignoreElements";
+export { map } from "./map";
+export { mergeMap } from "./mergeMap";
+export { observeOn } from "./observeOn";
+export { single } from "./single";
+export { skip } from "./skip";
+export { startWith } from "./startWith";
+export { subscribeOn } from "./subscribeOn";
+export { take } from "./take";
