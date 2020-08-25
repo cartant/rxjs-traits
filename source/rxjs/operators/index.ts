@@ -3,6 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
+export * from "./filter";
 export * from "./ignoreElements";
 export * from "./map";
 export * from "./skip";
