@@ -7,6 +7,7 @@ export { concatMap } from "./concatMap";
 export { filter } from "./filter";
 export { first } from "./first";
 export { ignoreElements } from "./ignoreElements";
+export { last } from "./last";
 export { map } from "./map";
 export { mergeMap } from "./mergeMap";
 export { observeOn } from "./observeOn";
