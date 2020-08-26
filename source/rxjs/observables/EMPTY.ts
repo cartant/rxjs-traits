@@ -11,7 +11,7 @@ export const EMPTY = root.EMPTY as Observable<
   {
     async: false;
     complete: true;
-    error: undefined;
+    error: false;
     max: 0;
     min: 0;
   }

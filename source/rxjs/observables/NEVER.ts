@@ -11,7 +11,7 @@ export const NEVER = root.NEVER as Observable<
   {
     async: false;
     complete: false;
-    error: undefined;
+    error: false;
     max: 0;
     min: 0;
   }
