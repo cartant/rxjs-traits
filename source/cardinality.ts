@@ -4,8 +4,7 @@
  */
 
 export type Cardinality = 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9;
-type N = undefined;
-type Argument = number | N;
+type N = number;
 
 type Additions = [
   [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
@@ -34,8 +33,8 @@ type Subtractions = [
 ];
 
 export type Add<
-  TLeft extends Argument,
-  TRight extends Argument
+  TLeft extends number,
+  TRight extends number
 > = TLeft extends Cardinality
   ? TRight extends Cardinality
     ? Additions[TLeft][TRight]
@@ -46,7 +45,7 @@ export type Element<TArrayLike> = TArrayLike extends readonly (infer TElement)[]
   ? TElement
   : never;
 
-export type Floor<TValue> = TValue extends number ? TValue : 0;
+export type Floor<TValue> = number extends TValue ? 0 : TValue;
 
 export type Length<TArrayLike> = TArrayLike extends readonly unknown[]
   ? number extends TArrayLike["length"]
@@ -55,30 +54,30 @@ export type Length<TArrayLike> = TArrayLike extends readonly unknown[]
   : N;
 
 export type Max<
-  TLeft extends Argument,
-  TRight extends Argument
+  TLeft extends number,
+  TRight extends number
 > = TLeft extends Cardinality
   ? TRight extends Cardinality
-    ? Subtract<TLeft, TRight> extends N
+    ? N extends Subtract<TLeft, TRight>
       ? TRight
       : TLeft
     : N
   : N;
 
 export type Min<
-  TLeft extends Argument,
-  TRight extends Argument
+  TLeft extends number,
+  TRight extends number
 > = TLeft extends Cardinality
   ? TRight extends Cardinality
-    ? Subtract<TLeft, TRight> extends N
+    ? N extends Subtract<TLeft, TRight>
       ? TLeft
       : TRight
     : N
   : N;
 
 export type Skip<
-  TLeft extends Argument,
-  TRight extends Argument
+  TLeft extends number,
+  TRight extends number
 > = TLeft extends Cardinality
   ? TRight extends Cardinality
     ? Subtractions[TLeft][TRight]
@@ -86,8 +85,8 @@ export type Skip<
   : N;
 
 export type Subtract<
-  TLeft extends Argument,
-  TRight extends Argument
+  TLeft extends number,
+  TRight extends number
 > = TLeft extends Cardinality
   ? TRight extends Cardinality
     ? Subtractions[TLeft][TRight]

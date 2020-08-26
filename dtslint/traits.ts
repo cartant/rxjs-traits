@@ -45,7 +45,7 @@ describe("Union", () => {
     const a = as<Union<CombinedTraits, "async">>(); // $ExpectType true | undefined
     const b = as<Union<CombinedTraits, "complete">>(); // $ExpectType true | undefined
     const c = as<Union<CombinedTraits, "error">>(); // $ExpectType true | undefined
-    const d = as<Union<CombinedTraits, "max">>(); // $ExpectType 1 | undefined
-    const e = as<Union<CombinedTraits, "max">>(); // $ExpectType 1 | undefined
+    const d = as<Union<CombinedTraits, "max">>(); // $ExpectType number
+    const e = as<Union<CombinedTraits, "max">>(); // $ExpectType number
   });
 });

@@ -3,30 +3,28 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-import { Cardinality } from "./cardinality";
-
 export type Traits = {
   async: boolean | undefined;
   complete: boolean | undefined;
   error: boolean | undefined;
-  max: Cardinality | undefined;
-  min: Cardinality | undefined;
+  max: number;
+  min: number;
 };
 
 export type DefaultTraits = {
   async: undefined;
   complete: undefined;
   error: undefined;
-  max: undefined;
-  min: undefined;
+  max: number;
+  min: number;
 };
 
 export type PromiseTraits = {
   async: true;
   complete: undefined;
   error: undefined;
-  max: undefined;
-  min: undefined;
+  max: number;
+  min: number;
 };
 
 export type All<TUnion extends boolean | undefined> = undefined extends TUnion

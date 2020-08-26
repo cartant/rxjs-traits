@@ -30,8 +30,8 @@ export function timer(
     async: true;
     complete: false;
     error: undefined;
-    max: undefined;
-    min: undefined;
+    max: number;
+    min: number;
   }
 >;
 

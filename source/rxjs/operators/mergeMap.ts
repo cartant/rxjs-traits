@@ -27,8 +27,8 @@ export type MergeTraits<
   async: Some<Union<[TSourceTraits, TInnerTraits], "async">>;
   complete: All<Union<[TSourceTraits, TInnerTraits], "complete">>;
   error: Some<Union<[TSourceTraits, TInnerTraits], "error">>;
-  max: undefined;
-  min: undefined;
+  max: number;
+  min: number;
 };
 
 export function mergeMap<TSource extends Observable, TInner extends Observable>(

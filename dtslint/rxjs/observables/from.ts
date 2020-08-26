@@ -12,8 +12,8 @@ describe("from", () => {
     const source = from(EMPTY);
     const async = as(source, "async"); // $ExpectType undefined
     const complete = as(source, "complete"); // $ExpectType undefined
-    const max = as(source, "max"); // $ExpectType undefined
-    const min = as(source, "min"); // $ExpectType undefined
+    const max = as(source, "max"); // $ExpectType number
+    const min = as(source, "min"); // $ExpectType number
   });
 
   it("should support from with array", () => {
@@ -28,15 +28,15 @@ describe("from", () => {
     const source = from(Promise.resolve("alice"));
     const async = as(source, "async"); // $ExpectType true
     const complete = as(source, "complete"); // $ExpectType undefined
-    const max = as(source, "max"); // $ExpectType undefined
-    const min = as(source, "min"); // $ExpectType undefined
+    const max = as(source, "max"); // $ExpectType number
+    const min = as(source, "min"); // $ExpectType number
   });
 
   it("should support from with root observable", () => {
     const source = from(root.of("alice"));
     const async = as(source, "async"); // $ExpectType undefined
     const complete = as(source, "complete"); // $ExpectType undefined
-    const max = as(source, "max"); // $ExpectType undefined
-    const min = as(source, "min"); // $ExpectType undefined
+    const max = as(source, "max"); // $ExpectType number
+    const min = as(source, "min"); // $ExpectType number
   });
 });

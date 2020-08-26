@@ -20,17 +20,17 @@ describe("Add", () => {
     const a = as<Add<0, 0>>(); // $ExpectType 0
     const b = as<Add<0, 1>>(); // $ExpectType 1
     const c = as<Add<1, 1>>(); // $ExpectType 2
-    const d = as<Add<1, 10>>(); // $ExpectType undefined
+    const d = as<Add<1, 10>>(); // $ExpectType number
   });
 
   it("should resolve as undefined for out-of-range cardinalities", () => {
-    const a = as<Add<1, -1>>(); // $ExpectType undefined
-    const b = as<Add<1, 9>>(); // $ExpectType undefined
+    const a = as<Add<1, -1>>(); // $ExpectType number
+    const b = as<Add<1, 9>>(); // $ExpectType number
   });
 
   it("should resolve as undefined for undefined arguments", () => {
-    const a = as<Add<1, undefined>>(); // $ExpectType undefined
-    const b = as<Add<undefined, 1>>(); // $ExpectType undefined
+    const a = as<Add<1, number>>(); // $ExpectType number
+    const b = as<Add<number, 1>>(); // $ExpectType number
   });
 });
 
@@ -55,7 +55,7 @@ describe("Floor", () => {
   });
 
   it("should return zero for out-of-range cardinalities", () => {
-    const a = as<Floor<undefined>>(); // $ExpectType 0
+    const a = as<Floor<number>>(); // $ExpectType 0
   });
 });
 
@@ -67,7 +67,7 @@ describe("Length", () => {
   });
 
   it("should resolve as undefined for non-tuple types", () => {
-    const a = as<Length<number[]>>(); // $ExpectType undefined
+    const a = as<Length<number[]>>(); // $ExpectType number
   });
 });
 
@@ -79,13 +79,13 @@ describe("Max", () => {
   });
 
   it("should resolve as undefined for out-of-range cardinalities", () => {
-    const a = as<Max<1, 10>>(); // $ExpectType undefined
-    const b = as<Max<10, 1>>(); // $ExpectType undefined
+    const a = as<Max<1, 10>>(); // $ExpectType number
+    const b = as<Max<10, 1>>(); // $ExpectType number
   });
 
   it("should resolve as undefined for undefined arguments", () => {
-    const a = as<Max<1, undefined>>(); // $ExpectType undefined
-    const b = as<Max<undefined, 1>>(); // $ExpectType undefined
+    const a = as<Max<1, number>>(); // $ExpectType number
+    const b = as<Max<number, 1>>(); // $ExpectType number
   });
 });
 
@@ -97,13 +97,13 @@ describe("Min", () => {
   });
 
   it("should resolve as undefined for out-of-range cardinalities", () => {
-    const a = as<Min<1, 10>>(); // $ExpectType undefined
-    const b = as<Min<10, 1>>(); // $ExpectType undefined
+    const a = as<Min<1, 10>>(); // $ExpectType number
+    const b = as<Min<10, 1>>(); // $ExpectType number
   });
 
   it("should resolve as undefined for undefined arguments", () => {
-    const a = as<Min<1, undefined>>(); // $ExpectType undefined
-    const b = as<Min<undefined, 1>>(); // $ExpectType undefined
+    const a = as<Min<1, number>>(); // $ExpectType number
+    const b = as<Min<number, 1>>(); // $ExpectType number
   });
 });
 
@@ -114,13 +114,13 @@ describe("Subtract", () => {
   });
 
   it("should resolve as undefined for out-of-range cardinalities", () => {
-    const a = as<Subtract<1, 2>>(); // $ExpectType undefined
-    const b = as<Subtract<1, 10>>(); // $ExpectType undefined
-    const c = as<Subtract<10, 1>>(); // $ExpectType undefined
+    const a = as<Subtract<1, 2>>(); // $ExpectType number
+    const b = as<Subtract<1, 10>>(); // $ExpectType number
+    const c = as<Subtract<10, 1>>(); // $ExpectType number
   });
 
   it("should resolve as undefined for undefined arguments", () => {
-    const a = as<Subtract<1, undefined>>(); // $ExpectType undefined
-    const b = as<Subtract<undefined, 1>>(); // $ExpectType undefined
+    const a = as<Subtract<1, number>>(); // $ExpectType number
+    const b = as<Subtract<number, 1>>(); // $ExpectType number
   });
 });

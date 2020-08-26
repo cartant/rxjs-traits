@@ -16,7 +16,7 @@ import {
 type Skip<
   TTraits extends Traits,
   TSkip extends number
-> = TTraits["max"] extends undefined
+> = number extends TTraits["max"]
   ? TTraits
   : Omit<TTraits, "max" | "min"> & {
       max: Floor<Subtract<TTraits["max"], TSkip>>;
@@ -40,8 +40,8 @@ export function skip<TSource extends Observable>(
   Observable<
     ObservableElement<TSource>,
     Omit<ObservableTraits<TSource>, "max" | "min"> & {
-      max: undefined;
-      min: undefined;
+      max: number;
+      min: number;
     }
   >
 >;

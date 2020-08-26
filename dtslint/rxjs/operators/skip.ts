@@ -31,8 +31,8 @@ describe("skip", () => {
     const result = source.pipe(skip(1 as number));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType undefined
-    const min = as(result, "min"); // $ExpectType undefined
+    const max = as(result, "max"); // $ExpectType number
+    const min = as(result, "min"); // $ExpectType number
   });
 
   it("should support skip(1) from EMPTY", () => {
@@ -49,7 +49,7 @@ describe("skip", () => {
     const result = source.pipe(skip(1));
     const async = as(result, "async"); // $ExpectType true
     const complete = as(result, "complete"); // $ExpectType false
-    const max = as(result, "max"); // $ExpectType undefined
-    const min = as(result, "min"); // $ExpectType undefined
+    const max = as(result, "max"); // $ExpectType number
+    const min = as(result, "min"); // $ExpectType number
   });
 });
