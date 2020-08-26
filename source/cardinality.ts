@@ -75,15 +75,6 @@ export type Min<
     : N
   : N;
 
-export type Skip<
-  TLeft extends number,
-  TRight extends number
-> = TLeft extends Cardinality
-  ? TRight extends Cardinality
-    ? Subtractions[TLeft][TRight]
-    : N
-  : N;
-
 export type Subtract<
   TLeft extends number,
   TRight extends number
