@@ -6,9 +6,9 @@
 import { Cardinality } from "./cardinality";
 
 export type Traits = {
-  async: true | false | undefined;
-  complete: true | false | undefined;
-  error: true | false | undefined;
+  async: boolean | undefined;
+  complete: boolean | undefined;
+  error: boolean | undefined;
   max: Cardinality | undefined;
   min: Cardinality | undefined;
 };
@@ -29,23 +29,17 @@ export type PromiseTraits = {
   min: undefined;
 };
 
-export type All<TUnion extends true | false | undefined> = Exclude<
-  TUnion,
-  true
-> extends never
-  ? true
-  : Exclude<TUnion, true | false> extends never
+export type All<TUnion extends boolean | undefined> = undefined extends TUnion
+  ? undefined
+  : false extends TUnion
   ? false
-  : undefined;
-
-export type Some<TUnion extends true | false | undefined> = Exclude<
-  TUnion,
-  false | undefined
-> extends never
-  ? Exclude<TUnion, false> extends never
-    ? false
-    : undefined
   : true;
+
+export type Some<TUnion extends boolean | undefined> = true extends TUnion
+  ? true
+  : undefined extends TUnion
+  ? undefined
+  : false;
 
 export type Union<
   TTraits extends Traits[],
