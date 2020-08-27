@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-import { of } from "../../../source/rxjs";
+import { EMPTY, of } from "../../../source/rxjs";
 import { first } from "../../../source/rxjs/operators";
 import { as } from "../as";
 

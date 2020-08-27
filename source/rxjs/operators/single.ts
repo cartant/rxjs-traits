@@ -4,6 +4,7 @@
  */
 
 import * as operators from "rxjs/operators";
+import { Shift } from "../../cardinality";
 import { Traits } from "../../traits";
 import {
   Observable,
@@ -13,8 +14,8 @@ import {
 } from "../Observable";
 
 type Single<TTraits extends Traits<any>> = Omit<TTraits, "max" | "min"> & {
-  max: [TTraits["max"][number]];
-  min: [TTraits["min"][number]];
+  max: Shift<1, TTraits["max"]>;
+  min: Shift<1, TTraits["min"]>;
 };
 
 export function single<TSource extends Observable>(
