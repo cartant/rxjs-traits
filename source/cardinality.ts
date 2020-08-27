@@ -53,6 +53,17 @@ export type Length<TArrayLike> = TArrayLike extends readonly unknown[]
     : TArrayLike["length"]
   : N;
 
+export type Less<
+  TLeft extends number,
+  TRight extends number
+> = TLeft extends Cardinality
+  ? TRight extends Cardinality
+    ? N extends Subtract<TLeft, TRight>
+      ? true
+      : false
+    : false
+  : false;
+
 export type Max<
   TLeft extends number,
   TRight extends number
@@ -75,6 +86,33 @@ export type Min<
     : N
   : N;
 
+export type Shift<TCount extends number, T extends unknown[]> = Less<
+  T["length"],
+  TCount
+> extends true
+  ? T
+  : TCount extends 0
+  ? []
+  : TCount extends 1
+  ? [T[0]]
+  : TCount extends 2
+  ? [T[0], T[1]]
+  : TCount extends 3
+  ? [T[0], T[1], T[2]]
+  : TCount extends 4
+  ? [T[0], T[1], T[2], T[3]]
+  : TCount extends 5
+  ? [T[0], T[1], T[2], T[3], T[4]]
+  : TCount extends 6
+  ? [T[0], T[1], T[2], T[3], T[4], T[5]]
+  : TCount extends 7
+  ? [T[0], T[1], T[2], T[3], T[4], T[5], T[6]]
+  : TCount extends 8
+  ? [T[0], T[1], T[2], T[3], T[4], T[5], T[6], T[7]]
+  : TCount extends 9
+  ? [T[0], T[1], T[2], T[3], T[4], T[5], T[6], T[7], T[8]]
+  : T[number][];
+
 export type Subtract<
   TLeft extends number,
   TRight extends number
@@ -83,3 +121,8 @@ export type Subtract<
     ? Subtractions[TLeft][TRight]
     : N
   : N;
+
+export type Unshift<
+  TElements extends unknown[],
+  TArrayLike extends unknown[]
+> = [...TElements, ...TArrayLike];
