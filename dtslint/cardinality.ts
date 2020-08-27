@@ -4,39 +4,15 @@
  */
 
 import {
-  Add,
   Element,
   Drop,
-  Floor,
-  Length,
   Less,
-  Max,
-  Min,
   Shift,
   Subtract,
   Unshift,
 } from "../source/cardinality";
 
 declare function as<T>(): T;
-
-describe("Add", () => {
-  it("should add in-range cardinalities", () => {
-    const a = as<Add<0, 0>>(); // $ExpectType 0
-    const b = as<Add<0, 1>>(); // $ExpectType 1
-    const c = as<Add<1, 1>>(); // $ExpectType 2
-    const d = as<Add<1, 10>>(); // $ExpectType number
-  });
-
-  it("should resolve as undefined for out-of-range cardinalities", () => {
-    const a = as<Add<1, -1>>(); // $ExpectType number
-    const b = as<Add<1, 9>>(); // $ExpectType number
-  });
-
-  it("should resolve as undefined for undefined arguments", () => {
-    const a = as<Add<1, number>>(); // $ExpectType number
-    const b = as<Add<number, 1>>(); // $ExpectType number
-  });
-});
 
 describe("Drop", () => {
   it("should drop from an empty tuple", () => {
@@ -74,28 +50,6 @@ describe("Element", () => {
   });
 });
 
-describe("Floor", () => {
-  it("should return an in-range cardinality", () => {
-    const a = as<Floor<1>>(); // $ExpectType 1
-  });
-
-  it("should return zero for out-of-range cardinalities", () => {
-    const a = as<Floor<number>>(); // $ExpectType 0
-  });
-});
-
-describe("Length", () => {
-  it("should determine the length of tuple types", () => {
-    const a = as<Length<[]>>(); // $ExpectType 0
-    const b = as<Length<[1]>>(); // $ExpectType 1
-    const c = as<Length<[1, 2]>>(); // $ExpectType 2
-  });
-
-  it("should resolve as undefined for non-tuple types", () => {
-    const a = as<Length<number[]>>(); // $ExpectType number
-  });
-});
-
 describe("Less", () => {
   it("should support in-range cardinalities", () => {
     const a = as<Less<1, 1>>(); // $ExpectType false
@@ -110,42 +64,6 @@ describe("Less", () => {
     const c = as<Less<number, 1>>(); // $ExpectType false
     const d = as<Less<9, number>>(); // $ExpectType false
     const e = as<Less<number, 9>>(); // $ExpectType false
-  });
-});
-
-describe("Max", () => {
-  it("should determine the max of in-range cardinalities", () => {
-    const a = as<Max<0, 1>>(); // $ExpectType 1
-    const b = as<Max<1, 8>>(); // $ExpectType 8
-    const c = as<Max<8, 1>>(); // $ExpectType 8
-  });
-
-  it("should resolve as undefined for out-of-range cardinalities", () => {
-    const a = as<Max<1, 10>>(); // $ExpectType number
-    const b = as<Max<10, 1>>(); // $ExpectType number
-  });
-
-  it("should resolve as undefined for undefined arguments", () => {
-    const a = as<Max<1, number>>(); // $ExpectType number
-    const b = as<Max<number, 1>>(); // $ExpectType number
-  });
-});
-
-describe("Min", () => {
-  it("should determine the min of in-range cardinalities", () => {
-    const a = as<Min<0, 1>>(); // $ExpectType 0
-    const b = as<Min<1, 8>>(); // $ExpectType 1
-    const c = as<Min<8, 1>>(); // $ExpectType 1
-  });
-
-  it("should resolve as undefined for out-of-range cardinalities", () => {
-    const a = as<Min<1, 10>>(); // $ExpectType number
-    const b = as<Min<10, 1>>(); // $ExpectType number
-  });
-
-  it("should resolve as undefined for undefined arguments", () => {
-    const a = as<Min<1, number>>(); // $ExpectType number
-    const b = as<Min<number, 1>>(); // $ExpectType number
   });
 });
 
