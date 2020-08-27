@@ -4,13 +4,22 @@
  */
 
 import * as operators from "rxjs/operators";
-import { Add } from "../../cardinality";
+import { Unshift } from "../../cardinality";
+import { Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
   ObservableTraits,
   Operator,
 } from "../Observable";
+
+type StartWith<TTraits extends Traits<any>, TValueElement> = Omit<
+  TTraits,
+  "max" | "min"
+> & {
+  max: Unshift<[TValueElement], TTraits["max"]>;
+  min: Unshift<[TValueElement], TTraits["min"]>;
+};
 
 export function startWith<TSource extends Observable, TValueElement>(
   value: TValueElement
@@ -19,10 +28,7 @@ export function startWith<TSource extends Observable, TValueElement>(
     TSource,
     Observable<
       ObservableElement<TSource> | TValueElement,
-      Omit<ObservableTraits<TSource>, "max" | "min"> & {
-        max: Add<ObservableTraits<TSource>["max"], 1>;
-        min: Add<ObservableTraits<TSource>["min"], 1>;
-      }
+      StartWith<ObservableTraits<TSource>, TValueElement>
     >
   >;
 }

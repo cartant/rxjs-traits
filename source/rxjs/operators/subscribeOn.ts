@@ -5,12 +5,17 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
+import { Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
   ObservableTraits,
   Operator,
 } from "../Observable";
+
+type SubscribeOn<TTraits extends Traits<any>> = Omit<TTraits, "async"> & {
+  async: true;
+};
 
 export function subscribeOn<TSource extends Observable>(
   scheduler: root.SchedulerLike
@@ -19,9 +24,7 @@ export function subscribeOn<TSource extends Observable>(
     TSource,
     Observable<
       ObservableElement<TSource>,
-      Omit<ObservableTraits<TSource>, "async"> & {
-        async: true;
-      }
+      SubscribeOn<ObservableTraits<TSource>>
     >
   >;
 }

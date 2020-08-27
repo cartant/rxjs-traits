@@ -4,11 +4,11 @@
  */
 
 import * as root from "rxjs";
-import { Element, Length } from "../../cardinality";
+import { Element } from "../../cardinality";
 import { DefaultTraits, PromiseTraits } from "../../traits";
 import { Observable } from "../Observable";
 
-export function from<TInput extends readonly unknown[]>(
+export function from<TInput extends readonly any[]>(
   input: TInput
 ): Observable<
   Element<TInput>,
@@ -16,18 +16,21 @@ export function from<TInput extends readonly unknown[]>(
     async: false;
     complete: true;
     error: undefined;
-    max: Length<TInput>;
-    min: Length<TInput>;
+    max: TInput;
+    min: TInput;
   }
 >;
 
 export function from<TElement>(
   input: Promise<TElement>
-): Observable<TElement, PromiseTraits>;
+): Observable<TElement, PromiseTraits<TElement>>;
 
 export function from<TInput extends root.ObservableInput<unknown>>(
   input: TInput
-): Observable<root.ObservedValueOf<TInput>, DefaultTraits>;
+): Observable<
+  root.ObservedValueOf<TInput>,
+  DefaultTraits<root.ObservedValueOf<TInput>>
+>;
 
 export function from<TInput extends root.ObservableInput<unknown>>(
   input: TInput

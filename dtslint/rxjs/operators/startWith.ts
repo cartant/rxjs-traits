@@ -13,7 +13,7 @@ describe("startWith", () => {
     const result = source.pipe(startWith(-1));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 4
-    const min = as(result, "min"); // $ExpectType 4
+    const max = as(result, "max"); // $ExpectType [number, number, number, number]
+    const min = as(result, "min"); // $ExpectType [number, number, number, number]
   });
 });

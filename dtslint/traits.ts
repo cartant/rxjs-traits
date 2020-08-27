@@ -8,13 +8,13 @@ import { All, DefaultTraits, Some, Union } from "../source/traits";
 declare function as<T>(): T;
 
 type CombinedTraits = [
-  DefaultTraits,
+  DefaultTraits<number>,
   {
     async: true;
     complete: true;
     error: true;
-    max: 1;
-    min: 1;
+    max: number[];
+    min: number[];
   }
 ];
 
@@ -45,7 +45,5 @@ describe("Union", () => {
     const a = as<Union<CombinedTraits, "async">>(); // $ExpectType true | undefined
     const b = as<Union<CombinedTraits, "complete">>(); // $ExpectType true | undefined
     const c = as<Union<CombinedTraits, "error">>(); // $ExpectType true | undefined
-    const d = as<Union<CombinedTraits, "max">>(); // $ExpectType number
-    const e = as<Union<CombinedTraits, "max">>(); // $ExpectType number
   });
 });

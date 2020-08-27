@@ -20,15 +20,15 @@ import {
   Operator,
 } from "../Observable";
 
-export type MergeTraits<
-  TSourceTraits extends Traits,
-  TInnerTraits extends Traits
+export type MergeMap<
+  TSourceTraits extends Traits<any>,
+  TInnerTraits extends Traits<any>
 > = {
   async: Some<Union<[TSourceTraits, TInnerTraits], "async">>;
   complete: All<Union<[TSourceTraits, TInnerTraits], "complete">>;
   error: Some<Union<[TSourceTraits, TInnerTraits], "error">>;
-  max: number;
-  min: number;
+  max: TInnerTraits["max"][number][];
+  min: TInnerTraits["min"][number][];
 };
 
 export function mergeMap<TSource extends Observable, TInner extends Observable>(
@@ -38,7 +38,7 @@ export function mergeMap<TSource extends Observable, TInner extends Observable>(
   TSource,
   Observable<
     ObservableElement<TInner>,
-    MergeTraits<ObservableTraits<TSource>, ObservableTraits<TInner>>
+    MergeMap<ObservableTraits<TSource>, ObservableTraits<TInner>>
   >
 >;
 
@@ -52,7 +52,10 @@ export function mergeMap<
   TSource,
   Observable<
     root.ObservedValueOf<TInner>,
-    MergeTraits<ObservableTraits<TSource>, PromiseTraits>
+    MergeMap<
+      ObservableTraits<TSource>,
+      PromiseTraits<root.ObservedValueOf<TInner>>
+    >
   >
 >;
 
@@ -66,7 +69,10 @@ export function mergeMap<
   TSource,
   Observable<
     root.ObservedValueOf<TInner>,
-    MergeTraits<ObservableTraits<TSource>, DefaultTraits>
+    MergeMap<
+      ObservableTraits<TSource>,
+      DefaultTraits<root.ObservedValueOf<TInner>>
+    >
   >
 >;
 

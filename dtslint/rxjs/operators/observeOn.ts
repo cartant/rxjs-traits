@@ -14,7 +14,7 @@ describe("observeOn", () => {
     const result = source.pipe(observeOn(root.asapScheduler));
     const async = as(result, "async"); // $ExpectType true
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 3
-    const min = as(result, "min"); // $ExpectType 3
+    const max = as(result, "max"); // $ExpectType [number, number, number]
+    const min = as(result, "min"); // $ExpectType [number, number, number]
   });
 });

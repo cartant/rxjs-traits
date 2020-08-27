@@ -16,8 +16,8 @@ export function interval(
       async: true;
       complete: false;
       error: undefined;
-      max: number;
-      min: number;
+      max: number[];
+      min: number[];
     }
   >;
 }

@@ -5,6 +5,7 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
+import { Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -12,16 +13,15 @@ import {
   Operator,
 } from "../Observable";
 
+type ObserveOn<TTraits extends Traits<any>> = Omit<TTraits, "async"> & {
+  async: true;
+};
+
 export function observeOn<TSource extends Observable>(
   scheduler: root.SchedulerLike
 ) {
   return (operators.observeOn(scheduler) as unknown) as Operator<
     TSource,
-    Observable<
-      ObservableElement<TSource>,
-      Omit<ObservableTraits<TSource>, "async"> & {
-        async: true;
-      }
-    >
+    Observable<ObservableElement<TSource>, ObserveOn<ObservableTraits<TSource>>>
   >;
 }

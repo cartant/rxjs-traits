@@ -4,6 +4,7 @@
  */
 
 import * as operators from "rxjs/operators";
+import { Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -11,16 +12,15 @@ import {
   Operator,
 } from "../Observable";
 
+type Filter<TTraits extends Traits<any>> = Omit<TTraits, "min"> & {
+  min: [];
+};
+
 export function filter<TSource extends Observable>(
   predicate: (value: ObservableElement<TSource>) => boolean
 ) {
   return (operators.filter(predicate) as unknown) as Operator<
     TSource,
-    Observable<
-      ObservableElement<TSource>,
-      Omit<ObservableTraits<TSource>, "min"> & {
-        min: 0;
-      }
-    >
+    Observable<ObservableElement<TSource>, Filter<ObservableTraits<TSource>>>
   >;
 }

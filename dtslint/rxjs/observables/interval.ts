@@ -11,7 +11,7 @@ describe("interval", () => {
     const source = interval(1e3);
     const async = as(source, "async"); // $ExpectType true
     const complete = as(source, "complete"); // $ExpectType false
-    const max = as(source, "max"); // $ExpectType number
-    const min = as(source, "min"); // $ExpectType number
+    const max = as(source, "max"); // $ExpectType number[]
+    const min = as(source, "min"); // $ExpectType number[]
   });
 });

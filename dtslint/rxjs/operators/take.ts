@@ -13,7 +13,8 @@ describe("take", () => {
     const result = source.pipe(take(1));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 1
+    const max = as(result, "max"); // $ExpectType [number]
+    const min = as(result, "min"); // $ExpectType [number]
   });
 
   it("should support take(1) from EMPTY", () => {
@@ -21,6 +22,7 @@ describe("take", () => {
     const result = source.pipe(take(1));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 0
+    const max = as(result, "max"); // $ExpectType []
+    const min = as(result, "min"); // $ExpectType []
   });
 });

@@ -4,18 +4,18 @@
  */
 
 import * as root from "rxjs";
-import { Element, Length } from "../../cardinality";
+import { Element } from "../../cardinality";
 import { Observable } from "../Observable";
 
-export function of<A extends unknown[]>(...args: A) {
+export function of<A extends any[]>(...args: A) {
   return root.of(...args) as Observable<
     Element<A>,
     {
       async: false;
       complete: true;
       error: undefined;
-      max: Length<A>;
-      min: Length<A>;
+      max: A;
+      min: A;
     }
   >;
 }

@@ -15,8 +15,8 @@ describe("mergeMap", () => {
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
     const error = as(result, "error"); // $ExpectType undefined
-    const max = as(result, "max"); // $ExpectType number
-    const min = as(result, "min"); // $ExpectType number
+    const max = as(result, "max"); // $ExpectType number[]
+    const min = as(result, "min"); // $ExpectType number[]
   });
 
   it("should support mergeMap() with promise", () => {
@@ -25,8 +25,8 @@ describe("mergeMap", () => {
     const async = as(result, "async"); // $ExpectType true
     const complete = as(result, "complete"); // $ExpectType undefined
     const error = as(result, "error"); // $ExpectType undefined
-    const max = as(result, "max"); // $ExpectType number
-    const min = as(result, "min"); // $ExpectType number
+    const max = as(result, "max"); // $ExpectType number[]
+    const min = as(result, "min"); // $ExpectType number[]
   });
 
   it("should support mergeMap() with root observable", () => {
@@ -35,7 +35,7 @@ describe("mergeMap", () => {
     const async = as(result, "async"); // $ExpectType undefined
     const complete = as(result, "complete"); // $ExpectType undefined
     const error = as(result, "error"); // $ExpectType undefined
-    const max = as(result, "max"); // $ExpectType number
-    const min = as(result, "min"); // $ExpectType number
+    const max = as(result, "max"); // $ExpectType number[]
+    const min = as(result, "min"); // $ExpectType number[]
   });
 });

@@ -4,7 +4,8 @@
  */
 
 import * as operators from "rxjs/operators";
-import { Cardinality, Min } from "../../cardinality";
+import { Cardinality, Shift } from "../../cardinality";
+import { Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -12,21 +13,33 @@ import {
   Operator,
 } from "../Observable";
 
+type Take<TTraits extends Traits<any>, TCount extends number> = Omit<
+  TTraits,
+  "max" | "min"
+> & {
+  max: Shift<TCount, TTraits["max"]>;
+  min: Shift<TCount, TTraits["min"]>;
+};
+
 export function take<TSource extends Observable, TCount extends Cardinality>(
   count: TCount
 ): Operator<
   TSource,
   Observable<
     ObservableElement<TSource>,
-    Omit<ObservableTraits<TSource>, "max"> & {
-      max: Min<ObservableTraits<TSource>["max"], TCount>;
-    }
+    Take<ObservableTraits<TSource>, TCount>
   >
 >;
 
 export function take<TSource extends Observable>(
   count: number
-): Operator<TSource, TSource>;
+): Operator<
+  TSource,
+  Observable<
+    ObservableElement<TSource>,
+    Take<ObservableTraits<TSource>, number>
+  >
+>;
 
 export function take<TSource extends Observable>(count: number) {
   return operators.take<ObservableElement<TSource>>(count);

@@ -6,6 +6,7 @@
 import {
   Add,
   Element,
+  Drop,
   Floor,
   Length,
   Less,
@@ -34,6 +35,27 @@ describe("Add", () => {
   it("should resolve as undefined for undefined arguments", () => {
     const a = as<Add<1, number>>(); // $ExpectType number
     const b = as<Add<number, 1>>(); // $ExpectType number
+  });
+});
+
+describe("Drop", () => {
+  it("should drop from an empty tuple", () => {
+    const a = as<Drop<0, []>>(); // $ExpectType []
+    const b = as<Drop<1, []>>(); // $ExpectType []
+    const c = as<Drop<2, []>>(); // $ExpectType []
+  });
+
+  it("should drop from an empty tuple", () => {
+    const a = as<Drop<0, [1, 2]>>(); // $ExpectType [1, 2]
+    const b = as<Drop<1, [1, 2]>>(); // $ExpectType [2]
+    const c = as<Drop<2, [1, 2]>>(); // $ExpectType []
+    const d = as<Drop<3, [1, 2]>>(); // $ExpectType []
+  });
+
+  it("should drop from an array", () => {
+    const a = as<Drop<0, number[]>>(); // $ExpectType number[]
+    const b = as<Drop<1, number[]>>(); // $ExpectType number[]
+    const c = as<Drop<2, number[]>>(); // $ExpectType number[]
   });
 });
 

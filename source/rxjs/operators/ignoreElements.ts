@@ -4,17 +4,20 @@
  */
 
 import * as operators from "rxjs/operators";
+import { Traits } from "../../traits";
 import { Observable, ObservableTraits, Operator } from "../Observable";
+
+type IgnoreElements<TTraits extends Traits<any>> = Omit<
+  TTraits,
+  "max" | "min"
+> & {
+  max: [];
+  min: [];
+};
 
 export function ignoreElements<TSource extends Observable>() {
   return (operators.ignoreElements() as unknown) as Operator<
     TSource,
-    Observable<
-      never,
-      Omit<ObservableTraits<TSource>, "max" | "min"> & {
-        max: 0;
-        min: 0;
-      }
-    >
+    Observable<never, IgnoreElements<ObservableTraits<TSource>>>
   >;
 }

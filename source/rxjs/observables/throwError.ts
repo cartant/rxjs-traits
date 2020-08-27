@@ -13,8 +13,8 @@ export function throwError(error: any, scheduler?: root.SchedulerLike) {
       async: false;
       complete: false;
       error: true;
-      max: 0;
-      min: 0;
+      max: [];
+      min: [];
     }
   >;
 }

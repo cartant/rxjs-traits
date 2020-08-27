@@ -13,7 +13,7 @@ describe("last", () => {
     const result = source.pipe(last());
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 1
-    const min = as(result, "min"); // $ExpectType 1
+    const max = as(result, "max"); // $ExpectType [number]
+    const min = as(result, "min"); // $ExpectType [number]
   });
 });

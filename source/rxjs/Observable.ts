@@ -7,8 +7,10 @@ import * as root from "rxjs";
 import { Traits } from "../traits";
 const traits = Symbol("traits");
 
-export interface Observable<TElement = unknown, TTraits extends Traits = Traits>
-  extends root.Observable<TElement> {
+export interface Observable<
+  TElement = any,
+  TTraits extends Traits<TElement> = Traits<TElement>
+> extends root.Observable<TElement> {
   // The traits property is never used. It exists solely to serve as a
   // structural differentiator between Observable and root.Observable.
   // Without it, `root.Observable extends Observable` resolves as `true`.
@@ -105,7 +107,7 @@ export interface Observable<TElement = unknown, TTraits extends Traits = Traits>
 
 export type ObservableElement<TObservable> = TObservable extends Observable<
   infer TElement,
-  Traits
+  Traits<any>
 >
   ? TElement
   : never;

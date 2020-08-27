@@ -11,15 +11,15 @@ describe("timer", () => {
     const source = timer(1e3);
     const async = as(source, "async"); // $ExpectType true
     const complete = as(source, "complete"); // $ExpectType true
-    const max = as(source, "max"); // $ExpectType 1
-    const min = as(source, "min"); // $ExpectType 1
+    const max = as(source, "max"); // $ExpectType [number]
+    const min = as(source, "min"); // $ExpectType [number]
   });
 
   it("should support timer with period", () => {
     const source = timer(1e3, 1e3);
     const async = as(source, "async"); // $ExpectType true
     const complete = as(source, "complete"); // $ExpectType false
-    const max = as(source, "max"); // $ExpectType number
-    const min = as(source, "min"); // $ExpectType number
+    const max = as(source, "max"); // $ExpectType number[]
+    const min = as(source, "min"); // $ExpectType number[]
   });
 });

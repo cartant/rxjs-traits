@@ -13,8 +13,8 @@ describe("skip", () => {
     const result = source.pipe(skip(1));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 2
-    const min = as(result, "min"); // $ExpectType 2
+    const max = as(result, "max"); // $ExpectType [number, number]
+    const min = as(result, "min"); // $ExpectType [number, number]
   });
 
   it("should support skip(2)", () => {
@@ -22,8 +22,8 @@ describe("skip", () => {
     const result = source.pipe(skip(2));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 1
-    const min = as(result, "min"); // $ExpectType 1
+    const max = as(result, "max"); // $ExpectType [number]
+    const min = as(result, "min"); // $ExpectType [number]
   });
 
   it("should support skip(number)", () => {
@@ -31,8 +31,8 @@ describe("skip", () => {
     const result = source.pipe(skip(1 as number));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType number
-    const min = as(result, "min"); // $ExpectType number
+    const max = as(result, "max"); // $ExpectType number[]
+    const min = as(result, "min"); // $ExpectType number[]
   });
 
   it("should support skip(1) from EMPTY", () => {
@@ -40,8 +40,8 @@ describe("skip", () => {
     const result = source.pipe(skip(1));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 0
-    const min = as(result, "min"); // $ExpectType 0
+    const max = as(result, "max"); // $ExpectType []
+    const min = as(result, "min"); // $ExpectType []
   });
 
   it("should support skip(1) with interval", () => {
@@ -49,7 +49,7 @@ describe("skip", () => {
     const result = source.pipe(skip(1));
     const async = as(result, "async"); // $ExpectType true
     const complete = as(result, "complete"); // $ExpectType false
-    const max = as(result, "max"); // $ExpectType number
-    const min = as(result, "min"); // $ExpectType number
+    const max = as(result, "max"); // $ExpectType number[]
+    const min = as(result, "min"); // $ExpectType number[]
   });
 });

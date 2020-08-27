@@ -3,7 +3,8 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-import { EMPTY, of } from "../../../source/rxjs";
+import * as root from "rxjs";
+import { EMPTY, from, of } from "../../../source/rxjs";
 import { map } from "../../../source/rxjs/operators";
 import { as } from "../as";
 
@@ -13,8 +14,8 @@ describe("map", () => {
     const result = source.pipe(map((value) => JSON.stringify(value)));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 3
-    const min = as(result, "min"); // $ExpectType 3
+    const max = as(result, "max"); // $ExpectType [string, string, string]
+    const min = as(result, "min"); // $ExpectType [string, string, string]
   });
 
   it("should support map() from EMPTY", () => {
@@ -22,7 +23,16 @@ describe("map", () => {
     const result = source.pipe(map((value) => JSON.stringify(value)));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 0
-    const min = as(result, "min"); // $ExpectType 0
+    const max = as(result, "max"); // $ExpectType []
+    const min = as(result, "min"); // $ExpectType []
+  });
+
+  it("should support map with root observable", () => {
+    const source = from(root.of(1, 2, 3));
+    const result = source.pipe(map((value) => JSON.stringify(value)));
+    const async = as(result, "async"); // $ExpectType undefined
+    const complete = as(result, "complete"); // $ExpectType undefined
+    const max = as(result, "max"); // $ExpectType string[]
+    const min = as(result, "min"); // $ExpectType string[]
   });
 });

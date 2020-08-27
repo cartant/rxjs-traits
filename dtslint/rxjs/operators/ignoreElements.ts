@@ -13,7 +13,7 @@ describe("ignoreElements", () => {
     const result = source.pipe(ignoreElements());
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
-    const max = as(result, "max"); // $ExpectType 0
-    const min = as(result, "min"); // $ExpectType 0
+    const max = as(result, "max"); // $ExpectType []
+    const min = as(result, "min"); // $ExpectType []
   });
 });

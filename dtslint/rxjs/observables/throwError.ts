@@ -12,7 +12,7 @@ describe("throwError", () => {
     const async = as(source, "async"); // $ExpectType false
     const complete = as(source, "complete"); // $ExpectType false
     const error = as(source, "error"); // $ExpectType true
-    const max = as(source, "max"); // $ExpectType 0
-    const min = as(source, "min"); // $ExpectType 0
+    const max = as(source, "max"); // $ExpectType []
+    const min = as(source, "min"); // $ExpectType []
   });
 });

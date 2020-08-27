@@ -11,7 +11,7 @@ describe("of", () => {
     const source = of(1, 2, 3);
     const async = as(source, "async"); // $ExpectType false
     const complete = as(source, "complete"); // $ExpectType true
-    const max = as(source, "max"); // $ExpectType 3
-    const min = as(source, "min"); // $ExpectType 3
+    const max = as(source, "max"); // $ExpectType [number, number, number]
+    const min = as(source, "min"); // $ExpectType [number, number, number]
   });
 });

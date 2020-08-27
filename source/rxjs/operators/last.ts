@@ -4,6 +4,7 @@
  */
 
 import * as operators from "rxjs/operators";
+import { Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -11,15 +12,14 @@ import {
   Operator,
 } from "../Observable";
 
+type Last<TTraits extends Traits<any>> = Omit<TTraits, "max" | "min"> & {
+  max: [TTraits["max"][number]];
+  min: [TTraits["min"][number]];
+};
+
 export function last<TSource extends Observable>() {
   return (operators.last() as unknown) as Operator<
     TSource,
-    Observable<
-      ObservableElement<TSource>,
-      Omit<ObservableTraits<TSource>, "max" | "min"> & {
-        max: 1;
-        min: 1;
-      }
-    >
+    Observable<ObservableElement<TSource>, Last<ObservableTraits<TSource>>>
   >;
 }

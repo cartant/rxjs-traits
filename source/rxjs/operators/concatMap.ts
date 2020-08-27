@@ -5,14 +5,19 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
-import { DefaultTraits, PromiseTraits } from "../../traits";
+import { DefaultTraits, PromiseTraits, Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
   ObservableTraits,
   Operator,
 } from "../Observable";
-import { MergeTraits } from "./mergeMap";
+import { MergeMap } from "./mergeMap";
+
+type ConcatMap<
+  TSourceTraits extends Traits<any>,
+  TInnerTraits extends Traits<any>
+> = MergeMap<TSourceTraits, TInnerTraits>;
 
 export function concatMap<
   TSource extends Observable,
@@ -24,7 +29,7 @@ export function concatMap<
   TSource,
   Observable<
     ObservableElement<TInner>,
-    MergeTraits<ObservableTraits<TSource>, ObservableTraits<TInner>>
+    ConcatMap<ObservableTraits<TSource>, ObservableTraits<TInner>>
   >
 >;
 
@@ -38,7 +43,10 @@ export function concatMap<
   TSource,
   Observable<
     root.ObservedValueOf<TInner>,
-    MergeTraits<ObservableTraits<TSource>, PromiseTraits>
+    ConcatMap<
+      ObservableTraits<TSource>,
+      PromiseTraits<root.ObservedValueOf<TInner>>
+    >
   >
 >;
 
@@ -52,7 +60,10 @@ export function concatMap<
   TSource,
   Observable<
     root.ObservedValueOf<TInner>,
-    MergeTraits<ObservableTraits<TSource>, DefaultTraits>
+    ConcatMap<
+      ObservableTraits<TSource>,
+      DefaultTraits<root.ObservedValueOf<TInner>>
+    >
   >
 >;
 

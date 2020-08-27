@@ -41,11 +41,41 @@ export type Add<
     : N
   : N;
 
+// prettier-ignore
+export type Drop<TCount extends number, T extends readonly unknown[]> = Less<
+  T["length"],
+  TCount
+> extends true
+  ? []
+  : TCount extends 0
+  ? T
+  : TCount extends 1
+  ? Func<T> extends (a: any, ...args: infer R) => void ? R : never
+  : TCount extends 2
+  ? Func<T> extends (a: any, b: any, ...args: infer R) => void ? R : never
+  : TCount extends 3
+  ? Func<T> extends (a: any, b: any, c: any, ...args: infer R) => void ? R : never
+  : TCount extends 4
+  ? Func<T> extends (a: any, b: any, c: any, d: any, ...args: infer R) => void ? R : never
+  : TCount extends 5
+  ? Func<T> extends (a: any, b: any, c: any, d: any, e:any, ...args: infer R) => void ? R : never
+  : TCount extends 6
+  ? Func<T> extends (a: any, b: any, c: any, d: any, e:any, f: any, ...args: infer R) => void ? R : never
+  : TCount extends 7
+  ? Func<T> extends (a: any, b: any, c: any, d: any, e:any, f: any, g: any, ...args: infer R) => void ? R : never
+  : TCount extends 8
+  ? Func<T> extends (a: any, b: any, c: any, d: any, e:any, f: any, g: any, h: any, ...args: infer R) => void ? R : never
+  : TCount extends 9
+  ? Func<T> extends (a: any, b: any, c: any, d: any, e:any, f: any, g: any, h: any, i: any, ...args: infer R) => void ? R : never
+  : T[number][];
+
 export type Element<TArrayLike> = TArrayLike extends readonly (infer TElement)[]
   ? TElement
   : never;
 
 export type Floor<TValue> = number extends TValue ? 0 : TValue;
+
+type Func<TArgs extends readonly unknown[]> = (...args: TArgs) => void;
 
 export type Length<TArrayLike> = TArrayLike extends readonly unknown[]
   ? number extends TArrayLike["length"]
@@ -86,7 +116,7 @@ export type Min<
     : N
   : N;
 
-export type Shift<TCount extends number, T extends unknown[]> = Less<
+export type Shift<TCount extends number, T extends readonly unknown[]> = Less<
   T["length"],
   TCount
 > extends true
@@ -123,6 +153,6 @@ export type Subtract<
   : N;
 
 export type Unshift<
-  TElements extends unknown[],
-  TArrayLike extends unknown[]
+  TElements extends readonly unknown[],
+  TArrayLike extends readonly unknown[]
 > = [...TElements, ...TArrayLike];

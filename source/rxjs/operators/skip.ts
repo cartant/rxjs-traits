@@ -4,7 +4,7 @@
  */
 
 import * as operators from "rxjs/operators";
-import { Cardinality, Floor, Min, Subtract } from "../../cardinality";
+import { Cardinality, Drop } from "../../cardinality";
 import { Traits } from "../../traits";
 import {
   Observable,
@@ -13,15 +13,13 @@ import {
   Operator,
 } from "../Observable";
 
-type Skip<
-  TTraits extends Traits,
-  TSkip extends number
-> = number extends TTraits["max"]
-  ? TTraits
-  : Omit<TTraits, "max" | "min"> & {
-      max: Floor<Subtract<TTraits["max"], TSkip>>;
-      min: Min<TTraits["min"], Floor<Subtract<TTraits["max"], TSkip>>>;
-    };
+type Skip<TTraits extends Traits<any>, TCount extends number> = Omit<
+  TTraits,
+  "max" | "min"
+> & {
+  max: Drop<TCount, TTraits["max"]>;
+  min: Drop<TCount, TTraits["min"]>;
+};
 
 export function skip<TSource extends Observable, TCount extends Cardinality>(
   count: TCount
@@ -39,10 +37,7 @@ export function skip<TSource extends Observable>(
   TSource,
   Observable<
     ObservableElement<TSource>,
-    Omit<ObservableTraits<TSource>, "max" | "min"> & {
-      max: number;
-      min: number;
-    }
+    Skip<ObservableTraits<TSource>, number>
   >
 >;
 
