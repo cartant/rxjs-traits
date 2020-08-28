@@ -61,6 +61,11 @@
     "url": "https://github.com/cartant/rxjs-traits.git"
   },
   "scripts": {
+    "dist": "yarn run dist:clean && yarn run dist:build",
+    "dist:build": "yarn run dist:build:cjs && yarn run dist:build:esm",
+    "dist:build:cjs": "tsc -p tsconfig-dist-cjs.json",
+    "dist:build:esm": "tsc -p tsconfig-dist-esm.json",
+    "dist:clean": "rimraf dist",
     "dtslint": "eslint \"./dtslint/**/*.ts\"",
     "lint": "eslint \"./source/**/*.{js,ts}\"",
     "prepublishOnly": "yarn run test && yarn run dist",
@@ -70,6 +75,5 @@
   },
   "sideEffects": false,
   "types": "./dist/esm/index.d.ts",
-  "unpkg": "./bundles/rxjs-traits.min.umd.js",
   "version": "0.0.1-beta.0"
 }
