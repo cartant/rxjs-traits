@@ -21,8 +21,8 @@ describe("filter", () => {
   it("should support filter with root observable", () => {
     const source = from(root.of(1, 2, 3));
     const result = source.pipe(filter((value) => Boolean(value)));
-    const async = as(result, "async"); // $ExpectType undefined
-    const complete = as(result, "complete"); // $ExpectType undefined
+    const async = as(result, "async"); // $ExpectType boolean
+    const complete = as(result, "complete"); // $ExpectType boolean
     const max = as(result, "max"); // $ExpectType number[]
     const min = as(result, "min"); // $ExpectType []
   });

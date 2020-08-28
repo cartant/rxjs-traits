@@ -5,7 +5,7 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
-import { DefaultTraits, PromiseTraits, Traits } from "../../traits";
+import { PromiseTraits, Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -60,10 +60,7 @@ export function concatMap<
   TSource,
   Observable<
     root.ObservedValueOf<TInner>,
-    ConcatMap<
-      ObservableTraits<TSource>,
-      DefaultTraits<root.ObservedValueOf<TInner>>
-    >
+    ConcatMap<ObservableTraits<TSource>, Traits<root.ObservedValueOf<TInner>>>
   >
 >;
 

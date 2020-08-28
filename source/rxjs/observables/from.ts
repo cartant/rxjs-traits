@@ -5,7 +5,7 @@
 
 import * as root from "rxjs";
 import { Element } from "../../cardinality";
-import { DefaultTraits, PromiseTraits } from "../../traits";
+import { PromiseTraits, Traits } from "../../traits";
 import { Observable } from "../Observable";
 
 export function from<TInput extends readonly any[]>(
@@ -15,7 +15,7 @@ export function from<TInput extends readonly any[]>(
   {
     async: false;
     complete: true;
-    error: undefined;
+    error: false;
     max: TInput;
     min: TInput;
   }
@@ -29,7 +29,7 @@ export function from<TInput extends root.ObservableInput<unknown>>(
   input: TInput
 ): Observable<
   root.ObservedValueOf<TInput>,
-  DefaultTraits<root.ObservedValueOf<TInput>>
+  Traits<root.ObservedValueOf<TInput>>
 >;
 
 export function from<TInput extends root.ObservableInput<unknown>>(

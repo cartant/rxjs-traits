@@ -6,7 +6,9 @@
 import { Observable } from "../../source/rxjs";
 import { Traits } from "../../source/traits";
 
-export declare function as<T extends Traits, K extends keyof Traits>(
-  observable: Observable<unknown, T>,
-  key: K
-): T[K];
+type Writeable<T> = { -readonly [P in keyof T]: T[P] };
+
+export declare function as<
+  T extends Traits<unknown>,
+  K extends keyof Traits<unknown>
+>(observable: Observable<unknown, T>, key: K): Writeable<T[K]>;

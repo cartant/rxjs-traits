@@ -13,7 +13,7 @@ export function of<A extends any[]>(...args: A) {
     {
       async: false;
       complete: true;
-      error: undefined;
+      error: false;
       max: A;
       min: A;
     }

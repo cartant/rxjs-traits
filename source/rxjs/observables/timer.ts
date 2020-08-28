@@ -14,7 +14,7 @@ export function timer(
   {
     async: true;
     complete: true;
-    error: undefined;
+    error: false;
     max: [number];
     min: [number];
   }
@@ -29,7 +29,7 @@ export function timer(
   {
     async: true;
     complete: false;
-    error: undefined;
+    error: false;
     max: number[];
     min: number[];
   }

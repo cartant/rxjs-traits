@@ -10,8 +10,8 @@ import { as } from "../as";
 describe("from", () => {
   it("should support from", () => {
     const source = from(EMPTY);
-    const async = as(source, "async"); // $ExpectType undefined
-    const complete = as(source, "complete"); // $ExpectType undefined
+    const async = as(source, "async"); // $ExpectType boolean
+    const complete = as(source, "complete"); // $ExpectType boolean
     const max = as(source, "max"); // $ExpectType never[]
     const min = as(source, "min"); // $ExpectType never[]
   });
@@ -20,22 +20,22 @@ describe("from", () => {
     const source = from([1, 2, 3] as const);
     const async = as(source, "async"); // $ExpectType false
     const complete = as(source, "complete"); // $ExpectType true
-    const max = as(source, "max"); // $ExpectType readonly [1, 2, 3]
-    const min = as(source, "min"); // $ExpectType readonly [1, 2, 3]
+    const max = as(source, "max"); // $ExpectType [1, 2, 3]
+    const min = as(source, "min"); // $ExpectType [1, 2, 3]
   });
 
   it("should support from with promise", () => {
     const source = from(Promise.resolve("alice"));
     const async = as(source, "async"); // $ExpectType true
-    const complete = as(source, "complete"); // $ExpectType undefined
+    const complete = as(source, "complete"); // $ExpectType boolean
     const max = as(source, "max"); // $ExpectType [string]
     const min = as(source, "min"); // $ExpectType [string]
   });
 
   it("should support from with root observable", () => {
     const source = from(root.of("alice"));
-    const async = as(source, "async"); // $ExpectType undefined
-    const complete = as(source, "complete"); // $ExpectType undefined
+    const async = as(source, "async"); // $ExpectType boolean
+    const complete = as(source, "complete"); // $ExpectType boolean
     const max = as(source, "max"); // $ExpectType string[]
     const min = as(source, "min"); // $ExpectType string[]
   });

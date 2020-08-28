@@ -5,14 +5,7 @@
 
 import * as root from "rxjs";
 import * as operators from "rxjs/operators";
-import {
-  All,
-  DefaultTraits,
-  PromiseTraits,
-  Some,
-  Traits,
-  Union,
-} from "../../traits";
+import { PromiseTraits, Traits, Union } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -24,9 +17,9 @@ export type MergeMap<
   TSourceTraits extends Traits<any>,
   TInnerTraits extends Traits<any>
 > = {
-  async: Some<Union<[TSourceTraits, TInnerTraits], "async">>;
-  complete: All<Union<[TSourceTraits, TInnerTraits], "complete">>;
-  error: Some<Union<[TSourceTraits, TInnerTraits], "error">>;
+  async: Union<[TSourceTraits, TInnerTraits], "async">;
+  complete: Union<[TSourceTraits, TInnerTraits], "complete">;
+  error: Union<[TSourceTraits, TInnerTraits], "error">;
   max: TInnerTraits["max"][number][];
   min: TInnerTraits["min"][number][];
 };
@@ -69,10 +62,7 @@ export function mergeMap<
   TSource,
   Observable<
     root.ObservedValueOf<TInner>,
-    MergeMap<
-      ObservableTraits<TSource>,
-      DefaultTraits<root.ObservedValueOf<TInner>>
-    >
+    MergeMap<ObservableTraits<TSource>, Traits<root.ObservedValueOf<TInner>>>
   >
 >;
 
