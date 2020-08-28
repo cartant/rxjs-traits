@@ -1,5 +1,5 @@
 {
-  "main": "dist/cjs/rxjs/operators/index.js",
-  "module": "dist/esm/rxjs/operators/index.js",
-  "types": "dist/esm/rxjs/operators/index.d.ts"
+  "main": "../dist/cjs/rxjs/operators/index.js",
+  "module": "../dist/esm/rxjs/operators/index.js",
+  "types": "../dist/esm/rxjs/operators/index.d.ts"
 }
