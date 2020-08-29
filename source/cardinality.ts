@@ -51,6 +51,18 @@ export type Element<TArrayLike> = TArrayLike extends readonly (infer TElement)[]
   ? TElement
   : never;
 
+export type Equal<
+  TLeft extends number,
+  TRight extends number,
+  TMaybe = false
+> = TLeft extends Cardinality
+  ? TRight extends Cardinality
+    ? Subtract<TLeft, TRight> extends 0
+      ? true
+      : false
+    : TMaybe
+  : TMaybe;
+
 export type Fill<TCount extends number, T> = TCount extends 0
   ? []
   : TCount extends 1

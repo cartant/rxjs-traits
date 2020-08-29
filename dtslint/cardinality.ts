@@ -5,6 +5,7 @@
 
 import {
   Element,
+  Equal,
   Fill,
   Drop,
   Less,
@@ -48,6 +49,31 @@ describe("Element", () => {
 
   it("should resolve as never for non-array like types", () => {
     const a = as<Element<1>>(); // $ExpectType never
+  });
+});
+
+describe("Equal", () => {
+  it("should support in-range cardinalities", () => {
+    const a = as<Equal<1, 1>>(); // $ExpectType true
+    const b = as<Equal<1, 9>>(); // $ExpectType false
+    const c = as<Equal<9, 1>>(); // $ExpectType false
+    const d = as<Equal<9, 9>>(); // $ExpectType true
+  });
+
+  it("should support out-of-range cardinalities", () => {
+    const a = as<Equal<number, number>>(); // $ExpectType false
+    const b = as<Equal<1, number>>(); // $ExpectType false
+    const c = as<Equal<number, 1>>(); // $ExpectType false
+    const d = as<Equal<9, number>>(); // $ExpectType false
+    const e = as<Equal<number, 9>>(); // $ExpectType false
+  });
+
+  it("should support maybe", () => {
+    const a = as<Equal<number, number, boolean>>(); // $ExpectType boolean
+    const b = as<Equal<1, number, boolean>>(); // $ExpectType boolean
+    const c = as<Equal<number, 1, boolean>>(); // $ExpectType boolean
+    const d = as<Equal<9, number, boolean>>(); // $ExpectType boolean
+    const e = as<Equal<number, 9, boolean>>(); // $ExpectType boolean
   });
 });
 
