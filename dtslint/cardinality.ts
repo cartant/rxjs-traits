@@ -81,6 +81,14 @@ describe("Less", () => {
     const d = as<Less<9, number>>(); // $ExpectType false
     const e = as<Less<number, 9>>(); // $ExpectType false
   });
+
+  it("should support maybe", () => {
+    const a = as<Less<number, number, boolean>>(); // $ExpectType boolean
+    const b = as<Less<1, number, boolean>>(); // $ExpectType boolean
+    const c = as<Less<number, 1, boolean>>(); // $ExpectType boolean
+    const d = as<Less<9, number, boolean>>(); // $ExpectType boolean
+    const e = as<Less<number, 9, boolean>>(); // $ExpectType boolean
+  });
 });
 
 describe("Shift", () => {

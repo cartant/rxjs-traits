@@ -77,14 +77,15 @@ type Func<TArgs extends readonly unknown[]> = (...args: TArgs) => void;
 
 export type Less<
   TLeft extends number,
-  TRight extends number
+  TRight extends number,
+  TMaybe = false
 > = TLeft extends Cardinality
   ? TRight extends Cardinality
     ? N extends Subtract<TLeft, TRight>
       ? true
       : false
-    : false
-  : false;
+    : TMaybe
+  : TMaybe;
 
 export type Shift<TCount extends number, T extends readonly unknown[]> = Less<
   T["length"],
