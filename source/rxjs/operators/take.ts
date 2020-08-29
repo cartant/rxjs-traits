@@ -5,7 +5,7 @@
 
 import * as operators from "rxjs/operators";
 import { Cardinality, Less, Shift } from "../../cardinality";
-import { Not, Some, Traits } from "../../traits";
+import { Either, Not, Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
@@ -15,8 +15,9 @@ import {
 
 type Take<TTraits extends Traits<any>, TCount extends number> = {
   async: TTraits["async"];
-  complete: Some<
-    TTraits["complete"] | Not<Less<TTraits["min"]["length"], TCount, boolean>>
+  complete: Either<
+    TTraits["complete"],
+    Not<Less<TTraits["min"]["length"], TCount, boolean>>
   >;
   error: TTraits["error"];
   max: Shift<TCount, TTraits["max"]>;

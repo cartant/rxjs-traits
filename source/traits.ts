@@ -19,15 +19,31 @@ export type PromiseTraits<T> = {
   min: [T];
 };
 
-export type All<TUnion extends boolean> = [TUnion] extends [true]
+export type Both<
+  TLeft extends boolean,
+  TRight extends boolean,
+  TMaybe = boolean
+> = [TLeft] extends [false]
+  ? false
+  : [TRight] extends [false]
+  ? false
+  : [TLeft | TRight] extends [true]
   ? true
-  : false;
+  : TMaybe;
+
+export type Either<
+  TLeft extends boolean,
+  TRight extends boolean,
+  TMaybe = boolean
+> = [TLeft] extends [true]
+  ? true
+  : [TRight] extends [true]
+  ? true
+  : [TLeft | TRight] extends [false]
+  ? false
+  : TMaybe;
 
 export type Not<TUnion extends boolean> = TUnion extends true ? false : true;
-
-export type Some<TUnion extends boolean> = [TUnion] extends [false]
-  ? false
-  : true;
 
 export type Union<
   TTraits extends readonly Traits<unknown>[],
