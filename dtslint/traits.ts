@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-import { All, Some, Union } from "../source/traits";
+import { All, Not, Some, Union } from "../source/traits";
 
 declare function as<T>(): T;
 
@@ -29,6 +29,14 @@ describe("All", () => {
     const a = as<All<true>>(); // $ExpectType true
     const b = as<All<false>>(); // $ExpectType false
     const c = as<All<boolean>>(); // $ExpectType false
+  });
+});
+
+describe("Not", () => {
+  it("should resolve to the logical negation", () => {
+    const a = as<Not<true>>(); // $ExpectType false
+    const b = as<Not<false>>(); // $ExpectType true
+    const c = as<Not<boolean>>(); // $ExpectType boolean
   });
 });
 

@@ -23,6 +23,8 @@ export type All<TUnion extends boolean> = [TUnion] extends [true]
   ? true
   : false;
 
+export type Not<TUnion extends boolean> = TUnion extends true ? false : true;
+
 export type Some<TUnion extends boolean> = [TUnion] extends [false]
   ? false
   : true;
