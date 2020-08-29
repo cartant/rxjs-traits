@@ -13,10 +13,10 @@ import {
   Operator,
 } from "../Observable";
 
-type Skip<TTraits extends Traits<any>, TCount extends number> = Omit<
-  TTraits,
-  "max" | "min"
-> & {
+type Skip<TTraits extends Traits<any>, TCount extends number> = {
+  async: TTraits["async"];
+  complete: TTraits["complete"];
+  error: TTraits["error"];
   max: Drop<TCount, TTraits["max"]>;
   min: Drop<TCount, TTraits["min"]>;
 };

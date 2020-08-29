@@ -13,10 +13,10 @@ import {
   Operator,
 } from "../Observable";
 
-type Take<TTraits extends Traits<any>, TCount extends number> = Omit<
-  TTraits,
-  "max" | "min"
-> & {
+type Take<TTraits extends Traits<any>, TCount extends number> = {
+  async: TTraits["async"];
+  complete: TTraits["complete"];
+  error: TTraits["error"];
   max: Shift<TCount, TTraits["max"]>;
   min: Shift<TCount, TTraits["min"]>;
 };

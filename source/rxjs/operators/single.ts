@@ -13,7 +13,10 @@ import {
   Operator,
 } from "../Observable";
 
-type Single<TTraits extends Traits<any>> = Omit<TTraits, "max" | "min"> & {
+type Single<TTraits extends Traits<any>> = {
+  async: TTraits["async"];
+  complete: TTraits["complete"];
+  error: TTraits["error"];
   max: Shift<1, TTraits["max"]>;
   min: Shift<1, TTraits["min"]>;
 };

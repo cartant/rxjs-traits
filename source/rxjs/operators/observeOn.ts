@@ -13,8 +13,12 @@ import {
   Operator,
 } from "../Observable";
 
-type ObserveOn<TTraits extends Traits<any>> = Omit<TTraits, "async"> & {
+type ObserveOn<TTraits extends Traits<any>> = {
   async: true;
+  complete: TTraits["complete"];
+  error: TTraits["error"];
+  max: TTraits["max"];
+  min: TTraits["min"];
 };
 
 export function observeOn<TSource extends Observable>(

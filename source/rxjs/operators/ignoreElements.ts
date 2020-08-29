@@ -7,10 +7,10 @@ import * as operators from "rxjs/operators";
 import { Traits } from "../../traits";
 import { Observable, ObservableTraits, Operator } from "../Observable";
 
-type IgnoreElements<TTraits extends Traits<any>> = Omit<
-  TTraits,
-  "max" | "min"
-> & {
+type IgnoreElements<TTraits extends Traits<any>> = {
+  async: TTraits["async"];
+  complete: TTraits["complete"];
+  error: TTraits["error"];
   max: [];
   min: [];
 };

@@ -13,10 +13,10 @@ import {
   Operator,
 } from "../Observable";
 
-type StartWith<TTraits extends Traits<any>, TValueElement> = Omit<
-  TTraits,
-  "max" | "min"
-> & {
+type StartWith<TTraits extends Traits<any>, TValueElement> = {
+  async: TTraits["async"];
+  complete: TTraits["complete"];
+  error: TTraits["error"];
   max: Unshift<[TValueElement], TTraits["max"]>;
   min: Unshift<[TValueElement], TTraits["min"]>;
 };

@@ -12,7 +12,11 @@ import {
   Operator,
 } from "../Observable";
 
-type Filter<TTraits extends Traits<any>> = Omit<TTraits, "min"> & {
+type Filter<TTraits extends Traits<any>> = {
+  async: TTraits["async"];
+  complete: TTraits["complete"];
+  error: TTraits["error"];
+  max: TTraits["max"];
   min: [];
 };
 

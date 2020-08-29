@@ -37,10 +37,10 @@ type Project<T extends readonly any[], P> = T["length"] extends 0
   ? [P, P, P, P, P, P, P, P]
   : P[];
 
-type Map<TTraits extends Traits<any>, TProjectElement> = Omit<
-  TTraits,
-  "max" | "min"
-> & {
+type Map<TTraits extends Traits<any>, TProjectElement> = {
+  async: TTraits["async"];
+  complete: TTraits["complete"];
+  error: TTraits["error"];
   max: Project<TTraits["max"], TProjectElement>;
   min: Project<TTraits["min"], TProjectElement>;
 };

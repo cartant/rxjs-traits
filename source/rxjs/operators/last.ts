@@ -12,7 +12,10 @@ import {
   Operator,
 } from "../Observable";
 
-type Last<TTraits extends Traits<any>> = Omit<TTraits, "max" | "min"> & {
+type Last<TTraits extends Traits<any>> = {
+  async: TTraits["async"];
+  complete: TTraits["complete"];
+  error: TTraits["error"];
   max: [TTraits["max"][number]];
   min: [TTraits["min"][number]];
 };
