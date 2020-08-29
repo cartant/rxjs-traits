@@ -8,5 +8,6 @@ export * from "./NEVER";
 export * from "./from";
 export * from "./interval";
 export * from "./of";
+export * from "./range";
 export * from "./throwError";
 export * from "./timer";

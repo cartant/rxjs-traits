@@ -51,6 +51,28 @@ export type Element<TArrayLike> = TArrayLike extends readonly (infer TElement)[]
   ? TElement
   : never;
 
+export type Fill<TCount extends number, T> = TCount extends 0
+  ? []
+  : TCount extends 1
+  ? [T]
+  : TCount extends 2
+  ? [T, T]
+  : TCount extends 3
+  ? [T, T, T]
+  : TCount extends 4
+  ? [T, T, T, T]
+  : TCount extends 5
+  ? [T, T, T, T, T]
+  : TCount extends 6
+  ? [T, T, T, T, T, T]
+  : TCount extends 7
+  ? [T, T, T, T, T, T, T]
+  : TCount extends 8
+  ? [T, T, T, T, T, T, T, T]
+  : TCount extends 9
+  ? [T, T, T, T, T, T, T, T, T]
+  : T[];
+
 type Func<TArgs extends readonly unknown[]> = (...args: TArgs) => void;
 
 export type Less<

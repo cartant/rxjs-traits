@@ -5,6 +5,7 @@
 
 import {
   Element,
+  Fill,
   Drop,
   Less,
   Shift,
@@ -47,6 +48,21 @@ describe("Element", () => {
 
   it("should resolve as never for non-array like types", () => {
     const a = as<Element<1>>(); // $ExpectType never
+  });
+});
+
+describe("Fill", () => {
+  it("should create a zero-length tuple", () => {
+    const a = as<Fill<0, number>>(); // $ExpectType []
+  });
+
+  it("should create a tuple for an in-range cardinality", () => {
+    const a = as<Fill<1, number>>(); // $ExpectType [number]
+    const b = as<Fill<9, number>>(); // $ExpectType [number, number, number, number, number, number, number, number, number]
+  });
+
+  it("should create an array for an out-of-range cardinality", () => {
+    const a = as<Fill<10, number>>(); // $ExpectType number[]
   });
 });
 
