@@ -3,7 +3,7 @@
  * can be found in the LICENSE file at https://github.com/cartant/rxjs-traits
  */
 
-import { EMPTY, of } from "../../../source/rxjs";
+import { EMPTY, NEVER, of } from "../../../source/rxjs";
 import { take } from "../../../source/rxjs/operators";
 import { as } from "../as";
 
@@ -22,6 +22,15 @@ describe("take", () => {
     const result = source.pipe(take(1));
     const async = as(result, "async"); // $ExpectType false
     const complete = as(result, "complete"); // $ExpectType true
+    const max = as(result, "max"); // $ExpectType []
+    const min = as(result, "min"); // $ExpectType []
+  });
+
+  it("should support take(1) from NEVER", () => {
+    const source = NEVER;
+    const result = source.pipe(take(1));
+    const async = as(result, "async"); // $ExpectType false
+    const complete = as(result, "complete"); // $ExpectType false
     const max = as(result, "max"); // $ExpectType []
     const min = as(result, "min"); // $ExpectType []
   });
