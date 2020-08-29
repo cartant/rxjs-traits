@@ -19,6 +19,14 @@ export type PromiseTraits<T> = {
   min: [T];
 };
 
+export type All<TUnion extends boolean> = [TUnion] extends [true]
+  ? true
+  : false;
+
+export type Some<TUnion extends boolean> = [TUnion] extends [false]
+  ? false
+  : true;
+
 export type Union<
   TTraits extends readonly Traits<unknown>[],
   TKey extends keyof Traits<unknown>
