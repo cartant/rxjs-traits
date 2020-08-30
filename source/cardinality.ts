@@ -99,6 +99,13 @@ export type Less<
     : TMaybe
   : TMaybe;
 
+export type Pop<T extends readonly unknown[]> = Less<
+  T["length"],
+  1
+> extends true
+  ? []
+  : [T[number]];
+
 export type Shift<TCount extends number, T extends readonly unknown[]> = Less<
   T["length"],
   TCount

@@ -4,6 +4,7 @@
  */
 
 import * as operators from "rxjs/operators";
+import { Pop } from "../../cardinality";
 import { Either, Not, Traits } from "../../traits";
 import {
   Observable,
@@ -17,8 +18,8 @@ type Last<TTraits extends Traits<any>> = {
   async: TTraits["async"];
   complete: TTraits["complete"];
   error: Either<TTraits["error"], Not<Takeable<TTraits, 1>>>;
-  max: [TTraits["max"][number]];
-  min: [TTraits["min"][number]];
+  max: Pop<TTraits["max"]>;
+  min: Pop<TTraits["min"]>;
 };
 
 export function last<TSource extends Observable>() {

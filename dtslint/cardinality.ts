@@ -9,6 +9,7 @@ import {
   Fill,
   Drop,
   Less,
+  Pop,
   Shift,
   Subtract,
   Unshift,
@@ -23,7 +24,7 @@ describe("Drop", () => {
     const c = as<Drop<2, []>>(); // $ExpectType []
   });
 
-  it("should drop from an empty tuple", () => {
+  it("should drop from a non-empty tuple", () => {
     const a = as<Drop<0, [1, 2]>>(); // $ExpectType [1, 2]
     const b = as<Drop<1, [1, 2]>>(); // $ExpectType [2]
     const c = as<Drop<2, [1, 2]>>(); // $ExpectType []
@@ -117,6 +118,20 @@ describe("Less", () => {
   });
 });
 
+describe("Pop", () => {
+  it("should pop from an empty tuple", () => {
+    const a = as<Pop<[]>>(); // $ExpectType []
+  });
+
+  it("should pop from a non-empty tuple", () => {
+    const a = as<Pop<[1, 2]>>(); // $ExpectType [1 | 2]
+  });
+
+  it("should pop from an array", () => {
+    const a = as<Pop<number[]>>(); // $ExpectType [number]
+  });
+});
+
 describe("Shift", () => {
   it("should shift from an empty tuple", () => {
     const a = as<Shift<0, []>>(); // $ExpectType []
@@ -124,7 +139,7 @@ describe("Shift", () => {
     const c = as<Shift<2, []>>(); // $ExpectType []
   });
 
-  it("should shift from an empty tuple", () => {
+  it("should shift from a non-empty tuple", () => {
     const a = as<Shift<0, [1, 2]>>(); // $ExpectType []
     const b = as<Shift<1, [1, 2]>>(); // $ExpectType [1]
     const c = as<Shift<2, [1, 2]>>(); // $ExpectType [1, 2]
