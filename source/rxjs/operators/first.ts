@@ -5,18 +5,19 @@
 
 import * as operators from "rxjs/operators";
 import { Shift } from "../../cardinality";
-import { Traits } from "../../traits";
+import { Either, Not, Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
   ObservableTraits,
   Operator,
 } from "../Observable";
+import { Takeable } from "./take";
 
 type First<TTraits extends Traits<any>> = {
   async: TTraits["async"];
-  complete: TTraits["complete"];
-  error: TTraits["error"];
+  complete: Either<TTraits["complete"], Takeable<TTraits, 1>>;
+  error: Either<TTraits["error"], Not<Takeable<TTraits, 1>>>;
   max: Shift<1, TTraits["max"]>;
   min: Shift<1, TTraits["min"]>;
 };

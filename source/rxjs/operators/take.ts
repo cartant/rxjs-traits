@@ -13,12 +13,13 @@ import {
   Operator,
 } from "../Observable";
 
+export type Takeable<TTraits extends Traits<any>, TCount extends number> =
+  | Not<Less<TTraits["max"]["length"], TCount, boolean>>
+  | Not<Less<TTraits["min"]["length"], TCount, boolean>>;
+
 type Take<TTraits extends Traits<any>, TCount extends number> = {
   async: TTraits["async"];
-  complete: Either<
-    TTraits["complete"],
-    Not<Less<TTraits["min"]["length"], TCount, boolean>>
-  >;
+  complete: Either<TTraits["complete"], Takeable<TTraits, TCount>>;
   error: TTraits["error"];
   max: Shift<TCount, TTraits["max"]>;
   min: Shift<TCount, TTraits["min"]>;

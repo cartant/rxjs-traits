@@ -4,18 +4,19 @@
  */
 
 import * as operators from "rxjs/operators";
-import { Traits } from "../../traits";
+import { Either, Not, Traits } from "../../traits";
 import {
   Observable,
   ObservableElement,
   ObservableTraits,
   Operator,
 } from "../Observable";
+import { Takeable } from "./take";
 
 type Last<TTraits extends Traits<any>> = {
   async: TTraits["async"];
   complete: TTraits["complete"];
-  error: TTraits["error"];
+  error: Either<TTraits["error"], Not<Takeable<TTraits, 1>>>;
   max: [TTraits["max"][number]];
   min: [TTraits["min"][number]];
 };
