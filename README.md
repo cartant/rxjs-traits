@@ -1,6 +1,6 @@
 # rxjs-traits
 
-This repo contains the rules that accompany the [`rxjs-traits`](https://github.com/cartant/rxjs-traits) proof-of-concept that [Moshe Kolodny](https://github.com/kolodny) and I have developed - and about which we spoke at RxJS Live London 2020.
+This repo contains the RxJS Traits proof-of-concept that [Moshe Kolodny](https://github.com/kolodny) and I have developed - and about which we spoke at RxJS Live London 2020.
 
 The repo contains a subset of the RxJS API with the intention that the subset be imported from `"rxjs-traits"` instead of `"rxjs"`. For example:
 
