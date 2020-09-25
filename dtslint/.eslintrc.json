@@ -3,6 +3,7 @@
   "plugins": ["dtslint"],
   "root": false,
   "rules": {
+    "@typescript-eslint/no-unused-vars": ["off"],
     "dtslint/expect-deprecation": ["error"],
     "dtslint/expect-type": ["error"],
     "dtslint/no-typo": ["error"],
