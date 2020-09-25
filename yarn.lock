@@ -293,11 +293,11 @@
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
 "@cartant/eslint-config-etc@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@cartant/eslint-config-etc/-/eslint-config-etc-2.0.0.tgz#6d578a222d69b61a800c5677f19f93159e279393"
-  integrity sha512-/duqR5i1NO53+6tG67u4eRYcmb0TirRKIec6FlAu6lDMLABTcoV8Vx8iQPSwebc45LxNd2WNhU0FSU9Fbhf7EQ==
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/@cartant/eslint-config-etc/-/eslint-config-etc-2.0.1.tgz#d9e87ed4b64ad3cdd3e02cde74b4497b1230a1f3"
+  integrity sha512-hkyfAVjpipJyrSXrh/Ej5R38+gyk5tcD3X/X1bHIheUQurmt7EU41HHtkQJOLQt9X2Vzz4oWphnz9ltnuIJ/8A==
   dependencies:
-    eslint-plugin-etc "^0.0.2-beta.45"
+    eslint-plugin-etc "^0.0.3-beta.46"
 
 "@cartant/eslint-config-rxjs@^2.0.0":
   version "2.0.0"
@@ -307,9 +307,9 @@
     eslint-plugin-rxjs "^0.0.3-beta.30"
 
 "@cartant/eslint-config@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@cartant/eslint-config/-/eslint-config-2.0.0.tgz#3ba6038476a330a07cb576e37e1322019a22ff32"
-  integrity sha512-ISwt/uKF3qRj6+1EARrZ6LK9HmX9SagpEkL2e6IT3e0A7Qe2sIfzt3mKiKKJiw/TnuyW6DoO4nay2C4BCLgD4Q==
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/@cartant/eslint-config/-/eslint-config-2.1.2.tgz#54042fac4bad5daf6937be53735d25b41d45fa55"
+  integrity sha512-228aH0IJSr2e/At6AJjVJcpIEZFjOwd4kLKj3kPtIf1mvXdxcvLNgIquKWX3gSqbwAHdy9JdmEymmMJlH8iENA==
   dependencies:
     "@typescript-eslint/eslint-plugin" "^4.0.0"
     eslint-plugin-import "^2.20.2"
@@ -1781,10 +1781,10 @@ eslint-plugin-dtslint@^2.0.0:
     tslib "^2.0.0"
     tsutils "^3.17.1"
 
-eslint-plugin-etc@^0.0.2-beta.45:
-  version "0.0.2-beta.45"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-etc/-/eslint-plugin-etc-0.0.2-beta.45.tgz#8862e146c6dea3f1c4d1f5d62ca03be2c2ff77fc"
-  integrity sha512-qZgYifdwVYJIJQuJJUxFhO10CyKqbZEWgftrq3tZ0mAOWd5YlToTSjEmjLz269TrG/S7YR8bc+V3fiz+rd+4uQ==
+eslint-plugin-etc@^0.0.3-beta.46:
+  version "0.0.3-beta.46"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-etc/-/eslint-plugin-etc-0.0.3-beta.46.tgz#673a4cfb537797e3e68ba48b6b1587e5c8af908d"
+  integrity sha512-U3J/1tGD+GuBeVXRQWJJZhL8WJzKLivvDNsQADGQuR69hx3Nc1oYK6zggphslbfG+4Ir6u2N5F9YufIphXIO4Q==
   dependencies:
     "@phenomnomnominal/tsquery" "^4.0.0"
     "@typescript-eslint/experimental-utils" "^4.0.0"
