@@ -25,6 +25,11 @@
     "rxjs": "^6.5.1",
     "typescript": "^4.0.2"
   },
+  "files": [
+    "dist",
+    "operators",
+    "source"
+  ],
   "homepage": "https://github.com/cartant/rxjs-traits",
   "husky": {
     "hooks": {
